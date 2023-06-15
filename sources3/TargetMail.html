@@ -1,0 +1,75 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+
+</head>
+<body>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+    <img src="http://indomieksa.com/sbtc/wp-content/uploads/2013/09/logo.png" /><br /><br />
+
+
+    <span style="font-family:Arial;font-size:10pt">
+        BranchName <b>{BranchName}</b>,<br /><br />
+        Product Group <b>{ProductGroup}</b>,<br /><br />
+        Salesman Group <b>{SalesmanGroup}</b>,<br /><br />
+        HO Target <b>{HOTarget}</b>,<br /><br />
+    </span>
+    <table>
+        <tr>
+            <td colspan="1" style="border: 1px solid black; text-align:center;"><b>Salesman</b></td>
+            <td colspan="2" style="border: 1px solid black; text-align: center;"><b>Target</b></td>
+            <td colspan="2" style="border: 1px solid black; text-align: center;"><b>Achievment</b></td>
+            <td colspan="2" style="border: 1px solid black; text-align: center;"><b>Achievment</b></td>
+        </tr>
+        <tr>
+            <td style="margin-left: 40px; border: 1px solid black;">
+                Salesman Name
+            </td>
+            <td style="margin-left: 40px; border: 1px solid black;">
+                Brn Target
+            </td>
+            <td style="margin-left: 40px; border: 1px solid black;">
+                Add Target
+            </td>
+
+            <td style="margin-left: 40px; border: 1px solid black;">
+                Van Sales
+            </td>
+
+            <td style="margin-left: 40px; border: 1px solid black;">
+                Taking Order
+
+            </td>
+            <td style="margin-left: 40px; border: 1px solid black; ">
+                Brn Target
+            </td>
+
+            <td style="margin-left: 40px; border: 1px solid black;">
+                Total Target
+            </td>
+        </tr>
+        {dataHTML}
+    </table>
+    
+</body>
+</html>

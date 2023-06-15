@@ -1,0 +1,84 @@
+/*tab*/
+@media only screen and (max-width: 768px) {
+   .header-top .nav-menu-left a{
+   		display: block;
+   }
+   .header-top > .nv-right,
+   .header-bottom > *{
+   		display: none;
+    }
+    .nav-left{
+    	display: block;
+    }
+    .nav-left .navbar-nav>li{
+   		float: none;
+    }
+    
+    .nav-left .navbar-nav>li>a p{
+    	margin-bottom: 0;
+    }
+    .nav-left .navbar-nav>li:not(.search) i{
+    	display: none;
+    }
+    .menu-full{
+    	display: block !important;
+	    position: fixed;
+	    top: 0;
+	    z-index: 999;
+	    height: 100%;
+	    transition: all .3s;
+	    transform: translateX(-100%);
+    }
+    .menu-full.show{
+    	overflow-y: auto;
+    	transform: translateX(0);
+    }
+    .menu-full .item-menu-full .menu-list a{
+    	line-height: 35px;
+    }
+    .menu-full .item-menu-full .menu-list li:before{
+    	top: 8px;
+    }
+    .top-corousel .item img{
+    	width: 100%;
+    }
+    .blck-bg.active{
+		display: block;
+		position: fixed;
+		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0;
+		background: rgba(0,0,0,.7);
+	}
+
+}
+
+/*smartphone*/
+@media only screen and (max-width: 425px) {
+   .top-corousel .carousel{
+   		display: none;
+   }
+   .menu-full .dropdown-menu-full .item-menu-full{
+   		width: 50% !important;
+   }
+}
+
+
+
+/*low tech phone*/
+@media only screen and (max-width: 375px) {
+   .nav-left{
+   	width: auto;
+   }
+   .menu-full .dropdown-menu-full .item-menu-full{
+   		width: 100% !important;
+   }
+}
+
+
+/*nokia*/
+@media only screen and (max-width: 320px) {
+  
+   
+}

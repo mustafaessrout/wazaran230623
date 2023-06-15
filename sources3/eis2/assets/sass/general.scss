@@ -1,0 +1,914 @@
+@import "variable.scss";
+
+body{
+    font-family: $fontfamliy1, Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+.space-between{
+  justify-content: space-between;
+}
+.no-margin{
+  margin: 0;
+}
+.capitalize{
+  text-transform: capitalize;
+}
+.dropdown-full{
+  position: static;
+}
+
+// color
+.text-primary{
+  color: $primary;
+}
+.text-secondary{
+  color: $secondary;
+}
+.text-success{
+  color: $success;
+}
+.text-danger{
+  color: $danger;
+}
+.text-warning{
+  color: $warning;
+}
+.text-info{
+  color: $info;
+}
+.text-light{
+  color: $light;
+}
+.text-dark{
+  color: $dark;
+}
+
+
+.primary{
+  background-color: $primary;
+  color: $white;
+}
+.secondary{
+  background-color: $secondary;
+  color: $white;
+}
+.success{
+  background-color: $success;
+  color: $white;
+}
+.danger{
+  background-color: $danger;
+  color: $white;
+}
+.warning{
+  background-color: $warning;
+  color: $white;
+}
+.info{
+  background-color: $info;
+  color: $white;
+}
+.light{
+  background-color: $light;
+}
+.dark{
+  background-color: $dark;
+  color: $white;
+}
+
+
+
+// button
+
+
+button{
+  &:hover{
+    cursor: pointer;
+  }
+  &.disabled{
+    border-color: $grey !important;
+    color:  $disabled;
+    &:focus{
+      box-shadow:none;
+    }
+  }
+  &[disabled]:hover,
+  &.disabled:hover
+  {
+    cursor: no-drop;
+  }
+}
+
+.btn-primary{
+  @include btn($primary);
+}
+.btn-secondary{
+  @include btn($secondary);
+}
+.btn-success{
+  @include btn($success);
+}
+.btn-danger{
+  @include btn($danger);
+
+}
+.btn-warning{
+  @include btn($warning);
+
+}
+.btn-info{
+  @include btn($info);
+
+}
+.btn-light{
+  @include btn($light);
+
+}
+.btn-dark{
+  @include btn($dark);
+}
+
+
+.btn-outline-primary{
+  @include  btn-outline($primary);
+}
+.btn-outline-secondary{
+  @include  btn-outline($secondary);
+}
+
+.btn-outline-success{
+  @include  btn-outline($success);
+}
+.btn-outline-danger{
+  @include  btn-outline($danger);
+}
+.btn-outline-warning{
+  @include  btn-outline($warning);
+}
+.btn-outline-info{
+  @include  btn-outline($info);
+}
+.btn-outline-light{
+  @include  btn-outline($light);
+}
+.btn-outline-dark{
+  @include  btn-outline($dark);
+}
+
+.btn-outline-disabled{
+  color: $disabled;
+  cursor: no-drop;
+  background-color: transparent;
+  background-image: none;
+  border-color: #868e96;
+  &:focus{
+    box-shadow:none;
+  }
+}
+
+.btn-rounded{
+  border-radius: 90px !important;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+
+
+.btn-ghost-primary,
+.btn-ghost-secondary,
+.btn-ghost-success,
+.btn-ghost-danger,
+.btn-ghost-warning,
+.btn-ghost-info,
+.btn-ghost-light,
+.btn-ghost-dark,
+.btn-ghost-disabled{
+  background: transparent;
+  color: lighten( $black, 10% );
+  border: 1px solid lighten( $black, 50% );;
+  transition: all .3s;
+  border-radius: 0;
+}
+
+.btn-no-border,
+.btn-no-border.disabled{
+  border-color: transparent !important;
+}
+
+.btn-ghost-primary:hover{
+  @include ghostBtn($primary);
+}
+.btn-ghost-secondary:hover{
+  @include ghostBtn($secondary);
+}
+.btn-ghost-success:hover{
+  @include ghostBtn($success);
+}
+.btn-ghost-warning:hover{
+  @include ghostBtn($warning);
+}
+.btn-ghost-danger:hover{
+  @include ghostBtn($danger);
+}
+.btn-ghost-info:hover{
+  @include ghostBtn($info);
+}
+.btn-ghost-light:hover{
+  @include ghostBtn($light);
+}
+.btn-ghost-dark:hover{
+  @include ghostBtn($dark);
+}
+
+.btn.btn-xl{
+  padding: 10px 16px;
+  font-size: 14px;
+  line-height: 1.4285715;
+  border-radius: 3px;
+}
+.btn.btn-lg{
+  padding: 9px 15px;
+  font-size: 14px;
+  line-height: 1.4285715;
+  border-radius: 3px;
+}
+.btn{
+  display: inline-block;
+    margin-bottom: 0;
+    font-weight: 400;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    white-space: nowrap;
+    padding: 7px 12px;
+    font-size: 13px;
+    line-height: 1.5384616;
+    border-radius: 3px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.btn.btn-sm{
+  padding: 6px 11px;
+  font-size: 12px;
+  line-height: 1.6666667;
+  border-radius: 3px;
+}
+.btn.btn-xs{
+  padding: 5px 10px;
+  font-size: 12px;
+  line-height: 1.6666667;
+  border-radius: 3px;
+}
+
+.nav-link{
+  cursor: pointer;
+}
+
+
+
+
+// pagination
+.pagination{
+  font-size: 12px;
+}
+
+
+.page-primary {
+  @include pageColor($primary);
+}
+.page-secondary {
+  @include pageColor($secondary);
+}
+.page-success {
+  @include pageColor($success);
+}
+.page-danger {
+  @include pageColor($danger);
+}
+.page-warning {
+  @include pageColor($warning);
+}
+.page-info {
+  @include pageColor($info);
+}
+.page-light {
+  @include pageColor($light);
+}
+.page-dark {
+  @include pageColor($dark);
+}
+
+.pagination.rounded{
+  .prev{
+    border-radius: 100px 0 0 100px;
+  }
+  .next{
+    border-radius: 0 100px 100px 0;
+  }
+}
+.pagination.no-border{
+  .page-link{
+    border:none;
+  }
+}
+.pagination.circle{
+  .page-link{
+    margin-left: 3px;
+    margin-right: 3px;
+    border-radius: 100px;
+  }
+}
+
+
+
+// badge
+.badge{
+  line-height: 14px;
+  padding: 2px 5px;
+}
+.badge.badge-lg{
+  padding: 5px 15px;
+}
+
+.badge-primary{
+  @include normalBadge($primary);
+}
+.badge-secondary{
+  @include normalBadge($secondary);
+}
+.badge-success{
+  @include normalBadge($success);
+}
+.badge-danger{
+  @include normalBadge($danger);
+}
+.badge-warning{
+  @include normalBadge($warning);
+}
+.badge-info{
+  @include normalBadge($info);
+}
+.badge-light{
+  @include normalBadge($light);
+}
+.badge-dark{
+  @include normalBadge($dark);
+}
+
+
+
+.justify-content-space-between{
+  justify-content: space-between;
+}
+
+.panel{
+  overflow: hidden;
+  margin-bottom: 20px;
+  color: $black;
+  background: #fff;
+  border-radius: 3px;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
+  .panel-header{
+    font-size: 13px;
+    font-weight: bold;
+    padding: 10px 20px 10px;
+  }
+  .panel-body{
+    padding: 10px 20px ;
+  }
+  .panel-footer{
+    font-size: 13px;
+    padding: 10px 20px 15px;
+  }
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+    color: $dropdownitemactive;
+    text-decoration: none;
+}
+.dropdown-item.active{
+  background-color: $dark;
+}
+
+.dropdown-item:active {
+  background-color: $header;
+}
+
+/*color*/
+.bg-dark{
+	background: $dark !important;
+}
+.bg-primary{
+    background-color: $primary !important;
+}
+.bg-danger {
+    background-color: $danger !important;
+}
+.bg-success {
+    background-color: $success !important;
+}
+.bg-info {
+    background-color: $info !important;
+}
+.text-info{
+    color: $info !important;
+}
+
+.bg-grey{
+  background: $grey;
+}
+.bg-ligth-grey{
+  background-color: $lightGrey;
+}
+.line-top{
+  border-top: 1px solid $lightGreyLine;
+}
+.line-bottom{
+  border-bottom: 1px solid $lightGreyLine;
+}
+
+
+
+/*dropdown*/
+.dropdown-toggle{
+	position: relative;
+	padding-right: 20px !important;
+}
+.dropdown-toggle::after{
+	position: absolute;
+    content: '\f107';
+    font-family: fontawesome;
+    border: none;
+    top: 20%;
+    right: 5px;
+    width: auto;
+}
+
+
+.look-all{
+  border-top: 1px solid #ddd;
+  a{
+    display: block;
+    text-align: center;
+    color: $black;
+    padding: 5px 0 0;
+    background-color: #fcfcfc;
+    transition: all .3s;
+    &:hover{
+      background-color:#f5f5f5;
+    }
+    i{
+      font-size: 16px;
+
+    }
+  }
+}
+
+
+
+// checkbox jelly
+input[type="checkbox"]{
+  display: none;
+
+  & + .cbx {
+    position: relative;
+    top: 1px;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #c8ccd4;
+    border-radius: 3px;
+    vertical-align: middle;
+    transition: background 0.1s ease;
+    cursor: pointer;
+    margin-right: 8px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 1px;
+      left: 5px;
+      width: 5px;
+      height: 11px;
+      opacity: 0;
+      transform: rotate(45deg) scale(0);
+      border-right: 2px solid #fff;
+      border-bottom: 2px solid #fff;
+      transition: all 0.3s ease;
+      transition-delay: 0.15s;
+    }
+  }
+  &:checked ~ .cbx:after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+  &:disabled ~ .cbx{
+    background: $lightGrey;
+    cursor: no-drop;
+  }
+  &:checked ~ .cbx {
+    border-color: transparent;
+    background: $dark;
+  }
+  &.checkbox-primary:checked ~ .cbx{
+    border-color: $primary;
+    background: $primary;
+  }
+  &.checkbox-secondary:checked ~ .cbx{
+    border-color: $secondary;
+    background: $secondary;
+  }
+  &.checkbox-success:checked ~ .cbx{
+    border-color: $success;
+    background: $success;
+  }
+  &.checkbox-danger:checked ~ .cbx{
+    border-color: $danger;
+    background: $danger;
+  }
+  &.checkbox-warning:checked ~ .cbx{
+    border-color: $warning;
+    background: $warning;
+  }
+  &.checkbox-info:checked ~ .cbx{
+    border-color: $info;
+    background: $info;
+  }
+  &.checkbox-light:checked ~ .cbx{
+    border-color: $light;
+    background: $light;
+  }
+  &.checkbox-dark:checked ~ .cbx{
+    border-color: $dark;
+    background: $dark;
+  }
+}
+.radio-label,
+.checkbox-label{
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+// radio
+input[type="radio"]{
+  display: none;
+
+  & + .cbx {
+    position: relative;
+    top: 1px;
+    width: 17px;
+    height: 17px;
+    border: 1px solid #c8ccd4;
+    border-radius: 50%;
+    vertical-align: middle;
+    transition: background 0.1s ease;
+    margin-right: 8px;
+    cursor: pointer;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      border-radius: 50%;
+      width: 9px;
+      height: 9px;
+      background: #fff;
+      transform: rotate(45deg) scale(0);
+      transition: all 0.3s ease;
+      transition-delay: 0.15s;
+    }
+  }
+  &:checked ~ .cbx:after {
+    opacity: 1;
+    transform: rotate(45deg) scale(1);
+  }
+  &:disabled ~ .cbx{
+    background: $lightGrey;
+    cursor: no-drop;
+  }
+  &:checked ~ .cbx {
+    border-color: transparent;
+    background: $dark;
+  }
+  &.radio-primary:checked ~ .cbx{
+    border-color: $primary;
+    background: $primary;
+  }
+  &.radio-secondary:checked ~ .cbx{
+    border-color: $secondary;
+    background: $secondary;
+  }
+  &.radio-success:checked ~ .cbx{
+    border-color: $success;
+    background: $success;
+  }
+  &.radio-danger:checked ~ .cbx{
+    border-color: $danger;
+    background: $danger;
+  }
+  &.radio-warning:checked ~ .cbx{
+    border-color: $warning;
+    background: $warning;
+  }
+  &.radio-info:checked ~ .cbx{
+    border-color: $info;
+    background: $info;
+  }
+  &.radio-light:checked ~ .cbx{
+    border-color: $light;
+    background: $light;
+  }
+  &.radio-dark:checked ~ .cbx{
+    border-color: $dark;
+    background: $dark;
+  }
+}
+
+
+.radio-jelly:checked ~ .cbx,
+.checkbox-jelly:checked ~ .cbx {
+  animation: jelly 0.6s ease;
+}
+
+@-moz-keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@-webkit-keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@-o-keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+@keyframes jelly {
+  from {
+    transform: scale(1, 1);
+  }
+  30% {
+    transform: scale(1.25, 0.75);
+  }
+  40% {
+    transform: scale(0.75, 1.25);
+  }
+  50% {
+    transform: scale(1.15, 0.85);
+  }
+  65% {
+    transform: scale(0.95, 1.05);
+  }
+  75% {
+    transform: scale(1.05, 0.95);
+  }
+  to {
+    transform: scale(1, 1);
+  }
+}
+
+
+
+// calendar
+.datepicker.datepicker-dropdown{
+  max-width: 200px;
+  padding: 0;
+
+  .datepicker-days,
+  .datepicker-months,
+  .datepicker-years,
+  .datepicker-decades,
+  .datepicker-centuries{
+    .table-condensed{
+      padding: 0;
+      thead tr:nth-child(2){
+        height: 40px;
+        background:$dateHead;
+        color: $white;
+        position: relative;
+        th{
+            border-radius: 0;
+
+          &:first-child,
+          &:last-child{
+            position: absolute;
+            display: block;
+            line-height: 14px;
+            top: 9px;
+            border-radius: 50%;
+            vertical-align: middle;
+            height: 25px;
+            width: 25px;
+            text-align: center;
+            &:hover{
+              background: lighten($dateHead, 10%);
+            }
+          }
+
+          &:first-child{
+            left: 5px;
+          }
+          &:last-child{
+            right: 5px;
+          }
+        }
+
+        .datepicker-switch{
+          width: 100%;
+          &:hover{
+            background: lighten($dateHead, 10%);
+          }
+        }
+      }
+      .dow{
+        color: lighten($black, 50%);
+        font-weight: 100;
+      }
+
+      .day,
+      .month,
+      .year,
+      .decade,
+      .century {
+        &.active{
+          border-radius: 50%;
+          background: $dateHead;
+          color: #fff;
+        }
+        &:hover,
+        &.focused{
+          border-radius: 50%;
+        }
+      }
+      span{
+        display: block;
+        width: 23%;
+        height: 44px;
+        line-height: 44px;
+        float: left;
+        margin: 1%;
+        cursor: pointer;
+      }
+
+    }
+  }
+}
+
+
+/*image*/
+.circle{
+  border-radius: 50%;
+}
+
+
+/*animated*/
+.fadeInUpCost {
+  animation-name: fadeInUpCost;
+}
+@keyframes fadeInUpCost {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fullRotate {
+  from {
+    transform:  rotate(0);
+  }
+
+  to {
+    transform:  rotate(360deg);
+  }
+}
+
+.bounceInUpCost{
+  animation-name: bounceInUpCost;
+}
+@keyframes bounceInUpCost {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  from {
+    opacity: 0;
+    transform: translate3d(0, 20px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, -10px, 0);
+  }
+
+  75% {
+    transform: translate3d(0, 5px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, -5px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.bounceInDownCost{
+  animation-name: bounceInDownCost;
+}
+@keyframes bounceInDownCost {
+  from, 60%, 75%, 90%, to {
+    animation-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1.000);
+  }
+
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20px, 0);
+  }
+
+  60% {
+    opacity: 1;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  75% {
+    transform: translate3d(0, -5px, 0);
+  }
+
+  90% {
+    transform: translate3d(0, 5px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}

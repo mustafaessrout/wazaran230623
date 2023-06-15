@@ -1,0 +1,507 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="promotor2.master.cs" Inherits="promotor_promotor2" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxP" %>
+<%@ Register TagName="SelectBox" TagPrefix="uc" Src="us_News.ascx" %>
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <script src="statics/js/jquery-3.2.1.min.js"></script>
+    <script src="statics/js/jquery.cookie.js"></script>
+    <script src="statics/js/index.js"></script>
+    <script src="Scripts/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="statics/css/metro.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <%--   <script src="Content/jquery.min.js"></script>--%>
+    <%--<link rel="stylesheet" type="text/css" href="statics/css/bootstrap.css"/>--%>
+    <link rel="stylesheet" type="text/css" href="statics/css/bootstrap-theme.css" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="statics/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/header2.css" />
+    <%--<link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet"/>--%>
+
+    <%--<script src="bootstrap.min.js"></script>--%>
+    <script src="statics/js/metro.min.js"></script>
+    <link href="statics/css/font-awesome.min.css" rel="stylesheet" />
+    <title>Wazaran Portal</title>
+    <link href="../css/sweetalert.css" rel="stylesheet" />
+    <script src="../js/sweetalert.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            console.log("sd1");
+            $(document).on('click', '.logoutApp', function () {
+                console.log("sd2");
+                $('.btnLogOutCSS').click();
+            });
+        });
+
+        function openreport(url) {
+            window.open(url, "myrep");
+        }
+
+        function PopupCenter(url, title, w, h) {
+            // Fixes dual-screen position                         Most browsers      Firefox
+            var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+            var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+            var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+            var top = ((height / 2) - (h / 2)) + dualScreenTop;
+            var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+            // Puts focus on the newWindow
+            if (window.focus) {
+                newWindow.focus();
+            }
+        }
+
+        function MsgWarning(sCap, sMsg) {
+            sweetAlert(sCap, sMsg, 'warning');
+        }
+
+
+        function MsgSuccess(sCap, sMsg) {
+            sweetAlert(sCap, sMsg, 'success');
+        }
+
+       
+
+        <%--$(document).ready(function () {
+
+            $(document).on('click', '.logoutApp', function () {
+                console.log("sd");
+                $get('<%#btLogout.ClientID%>').click();
+            });
+        });--%>
+
+        //$(function () {
+        //    //get persisted active accoridan index
+        //    var activeIndex = $.cookie('menu');
+        //    var activeElement = $('.menu').eq(activeIndex);
+        //    //guard code here to check you have a valid activeIndex...
+
+
+        //    $('.menu').accordion({
+        //        header: '',
+        //        active: activeElement,
+        //        change: function (event, ui) {
+        //            //set cookie here to new active header (index)
+        //            $.cookie('accordianActiveIndex', ui.newHeader.prevAll('h3').length)
+        //        }
+        //    });
+
+
+        //});
+        $(function () {
+
+            var activeIndex = parseInt($('#<%#hidAccordionIndex.ClientID %>').val());
+            $('#usr_nm').html($.cookie("usr_nm"));
+            $('#exh_dt').html($.cookie("exh_dt"));
+            <%--$(".menu").accordion({
+                autoHeight: false,
+                event: "mousedown",
+                active: activeIndex,
+                change: function (event, ui) {
+                    var index = $(this).children('h3').index(ui.newHeader);
+                    $('#<%#hidAccordionIndex.ClientID %>').val(index);
+                }
+            });--%>
+
+            //$.ajax({
+            //    type: "POST",
+            //    url: "us_News.ascx/GetNotification",
+            //    data: '{userID:' +$.cookie("usr_id") + '}',
+            //    contentType: "application/json; charset=utf-8",
+            //    dataType: "json",
+            //    success: OnSuccess,
+            //    failure: function (response) {
+            //        alert(response.d);
+            //    },
+            //    error: function (response) {
+            //        alert(response.d);
+            //    }
+            //});
+
+            function OnSuccess(response) {
+
+                var htmlData = '<ul id="notif-content">';
+                var htmlPopup = '';
+                var userDetails = '';
+                $('.badge').html(response.d.length);
+                for (i = 0; i < response.d.length; i++) {
+                    htmlData += ' <li"><a href="#" data-toggle="modal" data-target="#' + response.d[i]["notificationID"] + '" style="display:block" >' +
+                                '<div class="choice">' +
+                                    '<i class="fa fa-envelope"></i>' +
+                                    '<div class="tab-content">' +
+                                        '<p class="title">' + response.d[i]["titleSort"] + '</p>' +
+                                        '<p class="date">' + response.d[i]["notificationDate"] + '</p>' +
+                                        '<p class="ellapsis">' + response.d[i]["descSort"] + '</p>' +
+                                    '</div>' +
+                                '</div>' +
+                              '</a></li>';
+                    htmlPopup += '<div id="' + response.d[i]["notificationID"] + '" class="modal fade" role="dialog">' +
+                                   '<div class="modal-dialog">' +
+                                   '<div class="modal-content">' +
+                                       '<div class="modal-header">' +
+                                       '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+                                       '<h4 class="modal-title">' + response.d[i]["notificationSortMessage"] + '</h4>' +
+                                       '</div>' +
+                                       '<div class="modal-body">' +
+                                       '<p>' + response.d[i]["notificationDesc"] + '</p>' +
+                                       '</div>' +
+                                       '<div class="modal-footer">' +
+                                       '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+                                       '</div>' +
+                                   '</div>' +
+                                   '</div>' +
+                               '</div>';
+
+
+
+
+                    //if (response.d[i]["notificationID"] == 1) {
+                    //htmlData += ' <div id="dialog" title="Basic dialog">'+
+                    //                  '<p>This is the default dialog which is useful for displaying information. The dialog window can be moved, resized and closed with the "' + "x" +'"  icon.</p>'+
+                    //                  '</div>';
+
+                    //htmlData +='<a href="javascript:void(0)" onclick="document.getElementById('light').style.display="block";document.getElementById("fade").style.display="block"">here</a>';
+                    //htmlData +='<div id="light" class="white_content">This is the lightbox content. <a href="javascript:void(0)" onclick="document.getElementById("light").style.display="none";document.getElementById("fade").style.display="none"">Close</a>' +
+                    //'</div>'+
+                    //'<div id="fade" class="black_overlay"></div>';
+                    //}
+
+                    //htmlData += '<div id="light" class="white_content">This is the lightbox content. <a href="javascript:void(0)" onclick="document.getElementById("light").style.display="none";document.getElementById("fade").style.display="none">Close</a>' +
+                    //            '</div>' +
+                    //            '<div id="fade" class="black_overlay"></div>';
+                }
+
+                userDetails += '<div id="userDetails" class="modal fade" role="dialog">' +
+                          '<div class="modal-dialog">' +
+                          '<div class="modal-content">' +
+                              '<div class="modal-header">' +
+                              '<button type="button" class="close" data-dismiss="modal">&times;</button>' +
+                              '<h4 class="modal-title">Login Details</h4>' +
+                              '</div>' +
+                              '<div class="modal-body">' +
+                              '<div class="clearfix">' +
+                              '<div class="col-sm-6">'+
+                              '<p>Login ID</p>' +
+                              '<p>' + response.d[0]["usr_id"] + '</p>' +
+                              "</div>" +
+                              '<div class="col-sm-6">' +
+                              '<p>Full Name</p>' +
+                              '<p>' + response.d[0]["fullname"] + '</p>' +
+                              "</div>" +
+                              "</div>" +
+                              '</div>' +
+                              '<div class="modal-footer">' +
+                              '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>' +
+                              '</div>' +
+                          '</div>' +
+                          '</div>' +
+                      '</div>';
+
+                //$('#dvNotification').html(htmlData);
+
+               
+
+                $('#popShowMessage').html(htmlPopup);
+                $('#popShowUserDetails').html(userDetails);
+            }
+
+
+        });
+       
+    </script>
+    
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="align-strech cntner">
+    <form id="frmmain" runat="server" style="width: 100%">
+        <ajaxP:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></ajaxP:ToolkitScriptManager>
+        <div class="full">
+            <div class="btn-nav ">
+                <a href="#">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <header>
+                <div class="logo">
+                    <a href="#">
+                        <img src="statics/img/logo1.png" />
+                    </a>
+                </div>
+                <div class="header-menu">
+                    <div class="hidden-lg hidden-md  pull-right icon-hamburger">
+                        <a href="#">
+                            <i class="fa fa-bars"></i>
+                            <p>
+                                Menu
+                            </p>
+                        </a>
+                    </div>
+                    <div class="menus menu-burger">
+                        <div class="header-menu">
+                            <div class="close-burger hidden-lg hidden-md ">
+                                <a href="#" class=""><i class="fa fa-close"></i></a>
+                            </div>
+                            <a href="#">link</a>
+
+                            <div class="dropdown">
+                                <div class="drop-title">
+                                    <a href="">dropdown title</a>
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </div>
+                                <ul class="animated child">
+                                    <li>
+                                        <a href="#">Head Office ERP</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">linka</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="search">
+                                <%--	<form>--%>
+
+                                <input type="text" name="" class="animated" placeholder="search" />
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <%--		</form>--%>
+                            </div>
+                            <uc:SelectBox ID="fdsa" runat="server" />
+                            <%--<div class="notifications dropdown">
+                                <a href="#">
+                                    <i class="fa fa-globe"></i>
+                                    <span class="badge">10</span>
+                                </a>
+                                
+                                <div class="notif animated child">
+                                    <div class="ntf" style="height: 550px; overflow-y: scroll;">
+                                        <div class="tab-title">
+                                            <a href="#">Notification</a>
+                                        </div>
+                                        <div class="tab-container" id="dvNotification">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>--%>
+
+                            <div class="avatar dropdown">
+                                <a href="#" class="drop-title">
+                                    <div class="photo">
+                                        <img src="statics/img/dummy_prof.jpg">
+                                    </div>
+                                    <%if (Request.Cookies["exh_cd"] != null)
+                                      { %>
+                                    <p class="username"><span id="usr_nm" class="ellapsis"></span> </p>
+                                   
+                                    <%} %>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <div class="det-avatar animated child">
+                                    <ul>
+                                        <li>
+                                            <a href="#"  data-toggle="modal" data-target="#userDetails" style="display:block">
+                                                <i class="fa fa-user-circle"></i>
+                                                <span> My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-cogs"></i>
+                                                <span>Account Setting</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-question-circle"></i>
+                                                <span>Help</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-sign-out "></i>
+                                                <span class="logoutApp">Logout</span>
+                                                <asp:Button ID="btLogout" CssClass="btnLogOutCSS" runat="server" OnClick="btLogout_Click" Text="Button" Style="display: none" />
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="sidebar ">
+                    <div class="icon-menu-left">
+                        <a href="#">
+                            <i class="fa fa-arrow-right"></i>
+                            <p>
+                                Menu
+                            </p>
+                        </a>
+                    </div>
+                    <div class="icon-close">
+                        <a href="#">
+                            <i class="fa fa-close"></i>
+                        </a>
+                    </div>
+                    <div class="sidebar-title">
+
+                        <h2>Wazaran</h2>
+                        <p>Head Office</p>
+
+                    </div>
+
+                    <asp:UpdatePanel ID="UpdatePanel1" runat="server" RenderMode="Inline" UpdateMode="Conditional">
+                        <ContentTemplate>
+                            <div class="menu">
+                                <asp:HiddenField ID="hidAccordionIndex" runat="server" Value="0" />
+                                <ul>
+                                    <li class="active">
+                                        <a href="default.aspx">
+                                            <i class="fa fa-home"></i>
+                                            <p>Home </p>
+                                        </a>
+                                    </li>
+
+                                    <li class="dropdown">
+                                        <a href="#android" class="dropselect">
+                                            <i class="fa fa-address-card"></i>
+                                            <p>Promoter</p>
+                                        </a>
+
+                                        <ul class="childs">
+
+                                            <li>
+                                                <a href="/promotor/fm_mstoutsource.aspx" class="dropselect">Master Outsource
+                                                </a>
+
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_mstexhibition.aspx">Master Exhibition
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_stockin.aspx">Stock In
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_setupprice.aspx">Setup Price
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_exhibitioninttrf.aspx">Internal Transfer
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_exhibitionother.aspx">Other Order
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_exhibitdiscount.aspx">Setup Discount
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_exhibitorder.aspx">Sales Order
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_reqcashout.aspx">Cashout Request
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_closing.aspx">Closing Daily
+                                                </a>
+                                            </li>
+                                            <li>
+                                                <a href="/promotor/fm_reporting.aspx">Reporting
+                                                </a>
+                                            </li>
+
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ContentTemplate>
+                    </asp:UpdatePanel>
+                </div>
+
+                <div class="main-content container-fluid">
+
+                    <div class="row type-list">
+                        <div class="containers bg-white">
+
+
+                            <div class="work-content">
+                                <%--EnablePartialRendering="true"--%>
+
+
+                                <asp:ContentPlaceHolder ID="mainholder" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <footer class="space-between center">
+                <div class="created">
+                    <p>Created by <a href="#">SBTC</a> © 2017</p>
+                </div>
+                <!-- 	<div class="logo">
+				<img src="img/logo1.png">
+			</div> -->
+            </footer>
+        </div>
+
+
+        <div class="nav-bl">
+        </div>
+    </form>
+
+    <%--htmlData += '<div id="' + response.d[i]["notificationID"] + '" class="modal fade" role="dialog">' +
+                                    '<div class="modal-dialog">'+
+                                    '<div class="modal-content">'+
+                                        '<div class="modal-header">'+
+                                        '<button type="button" class="close" data-dismiss="modal">&times;</button>'+
+                                        '<h4 class="modal-title">Modal Header</h4>'+
+                                        '</div>'+
+                                        '<div class="modal-body">'+
+                                        '<p>Some text in the modal.</p>'+
+                                        '</div>'+
+                                        '<div class="modal-footer">'+
+                                        '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>'+
+                                        '</div>'+
+                                    '</div>'+
+                                    '</div>'+
+                                '</div>';
+    --%>
+
+    <div id="popShowMessage"> 
+   </div>
+    <div id="popShowUserDetails"> 
+   </div>
+
+</body>
+
+
+</html>

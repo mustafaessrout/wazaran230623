@@ -1,0 +1,177 @@
+﻿
+
+.divhid {
+    display:none;
+}
+
+.divnormal
+{
+    display:normal;
+    font-family:Calibri;
+}
+
+.divid {
+            width:100%;
+            height:5px;
+       }
+
+.makeitupper {
+    text-transform:uppercase;
+}
+
+.makeitreadonly {
+    background-color:silver;
+    color:blue;
+    font-weight: 700;
+}
+
+.ro {
+    background-color:rgba(144, 144, 144, 0.4) !important;
+    cursor:not-allowed;
+    font-weight: 700;
+    pointer-events:none;
+    -moz-user-select: none;
+   -ms-user-select: none;
+    user-select: none;     
+   border-top:none;
+   border-left:none;
+   border-right:none;
+}
+
+.makeitreadwrite{
+    background-color:white;
+    cursor:initial;
+}
+
+.navi {
+    text-align:center;
+    width:100%;
+    padding-top:7px;
+    
+}
+
+.warn {
+    text-align:left;
+    text-decoration-color:red;
+    color:red;
+    font-size:smaller;
+    font-weight:bold;
+}
+
+.treeNode
+        {
+            color:blue;
+            font:14px Arial, Sans-Serif;
+        }
+.rootNode
+        {
+            font-size:18px;
+            width:100%;
+            border-bottom:Solid 1px black;
+        }
+.leafNode
+        {
+            border:Dotted 2px black;
+            padding:4px;
+            background-color:#eeeeee;
+            font-weight:bold;
+        }
+
+.button3 {
+    color: #6e6e6e;
+    font: bold 12px Calibri, Arial, sans-serif;
+    text-decoration: none;
+    /* padding: 7px 12px; */
+   /* position: relative; */
+    display: inline-block;
+    text-shadow: 0 1px 0 #fff;
+    -webkit-transition: border-color .218s;
+    -moz-transition: border .218s;
+    -o-transition: border-color .218s;
+    transition: border-color .218s;
+    /*background: #f3f3f3;
+    background: -webkit-gradient(linear,0% 40%,0% 70%,from(#F5F5F5),to(#F1F1F1));
+    background: -moz-linear-gradient(linear,0% 40%,0% 70%,from(#F5F5F5),to(#F1F1F1));
+    */
+    border: solid 1px #dcdcdc;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    margin-right: 10px;
+  }
+
+.ddl
+        {
+            border:2px solid #7d6754;
+            border-radius:3px;
+            padding:2px 2px 2px 2px;
+            -webkit-appearance: none; 
+            background-image:url('Arrowhead-Down-01.png');
+            background-position:right; 
+            background-repeat:no-repeat;
+            text-indent: 0px;/*In Firefox*/
+            text-overflow: initial;/*In Firefox*/
+        }
+
+.MyCalendar .ajax__calendar_container {
+    border:1px solid #646464;
+    background-color: lemonchiffon;
+    color: red;
+}
+.MyCalendar .ajax__calendar_other .ajax__calendar_day,
+.MyCalendar .ajax__calendar_other .ajax__calendar_year {
+    color: black;
+}
+.MyCalendar .ajax__calendar_hover .ajax__calendar_day,
+.MyCalendar .ajax__calendar_hover .ajax__calendar_month,
+.MyCalendar .ajax__calendar_hover .ajax__calendar_year {
+    color: black;
+}
+.MyCalendar .ajax__calendar_active .ajax__calendar_day,
+.MyCalendar .ajax__calendar_active .ajax__calendar_month,
+.MyCalendar .ajax__calendar_active .ajax__calendar_year {
+    color: black;
+    font-weight:bold;
+}
+ .teamCalendar .ajax__calendar_container
+        {
+            border: 2px solid black;
+            background-color: black;
+            font-size: 11px;
+            color: white;
+        }
+    .mygrid
+    {
+        border: 1px solid #A1DCF2;
+        overflow: hidden;
+    }
+    .mygrid thead th,
+    .mygrid tbody th{
+        background-color: #5D7B9D;
+        padding-top: 10px;
+        padding-bottom: 6px;
+        text-align: center;
+        color:#fff;
+    }
+    .mygrid td, .rounded_corners th
+    {
+        border: 1px solid #fff;
+        min-width: 50px;
+        font-size: 10pt;
+        text-align: center;
+    }
+    .mygrid table table td
+    {
+        border-style: none;
+    }
+    .mygridro{
+        border: 1px solid #A1DCF2;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        overflow: hidden;
+        font-family:Calibri;
+          pointer-events:none;
+   
+    }
+  

@@ -1,0 +1,528 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="homaster.master.cs" Inherits="promotor_promotor2" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+
+    <title>Wazaran Portal</title>
+
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="statics/css/metro.css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/animate.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/responsive.css" />
+    <link rel="stylesheet" type="text/css" href="statics/css/header2.css" />
+    <link href="../css/sweetalert.css" rel="stylesheet" />
+
+
+    <script src="statics/js/jquery-3.2.1.min.js"></script>
+    <script src="statics/js/index.js"></script>
+    <script src="statics/js/bootstrap.min.js"></script>
+    <script src="statics/js/metro.min.js"></script>
+    <script src="../js/sweetalert.min.js"></script>
+
+
+    <script>
+        function openreport(url) {
+            window.open(url, "myrep");
+        }
+        $(document).ready(function () {
+            
+            $(document).on('click', '.logoutApp', function () {
+                $('.btnLogOutCSS').click();
+            });
+        });
+        function PopupCenter(url, title, w, h) {
+            // Fixes dual-screen position                         Most browsers      Firefox
+            var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+            var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+            var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+            var top = ((height / 2) - (h / 2)) + dualScreenTop;
+            var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+
+           
+        }
+        function MsgWarning(sCap, sMsg) {
+            sweetAlert(sCap, sMsg, 'warning');
+        }
+    </script>
+
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+</head>
+<body class="align-strech cntner">
+
+    <form id="frmmain" runat="server" style="width: 100%">
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
+        <div class="full">
+            <div class="btn-nav ">
+                <a href="#">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </a>
+            </div>
+
+            <header>
+                <div class="logo">
+                    <a href="#">
+                        <img src="statics/img/logo1.png" />
+                    </a>
+                </div>
+                <div class="header-menu">
+                    <div class="hidden-lg hidden-md  pull-right icon-hamburger">
+                        <a href="#">
+                            <i class="fa fa-bars"></i>
+                            <p>
+                                Menu
+                            </p>
+                        </a>
+                    </div>
+                    <div class="menus menu-burger">
+                        <div class="header-menu">
+                            <div class="close-burger hidden-lg hidden-md ">
+                                <a href="#" class=""><i class="fa fa-close"></i></a>
+                            </div>
+                            <a href="#">link</a>
+
+                            <div class="dropdown">
+                                <div class="drop-title">
+                                    <a href="">dropdown title</a>
+                                    <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                </div>
+                                <ul class="animated child">
+                                    <li>
+                                        <a href="#">Head Office ERP</a>
+                                    </li>
+                                    <li>
+                                        <a href="#">linka</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="search">
+                                <%--	<form>--%>
+
+                                <input type="text" name="" class="animated" placeholder="search">
+                                <button type="submit">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                                <%--		</form>--%>
+                            </div>
+
+                            <div class="notifications dropdown">
+                                <a href="#">
+                                    <i class="fa fa-globe"></i>
+                                    <span class="badge">10</span>
+                                </a>
+
+                                <div class="notif animated child">
+                                    <div class="ntf">
+                                        <div class="tab-title">
+                                            <a href="#">Notification</a>
+                                        </div>
+                                        <div class="tab-container">
+                                            <ul id="notif-content">
+                                                <li>
+                                                    <div class="choice">
+                                                        <i class="fa fa-envelope"></i>
+                                                        <div class="tab-content">
+                                                            <p class="title">Loerme ipsum dolor</p>
+                                                            <p class="date">June 20, 2017</p>
+                                                            <p class="ellapsis">lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="choice">
+                                                        <i class="fa fa-envelope"></i>
+                                                        <div class="tab-content">
+                                                            <p class="title">Loerme ipsum dolor</p>
+                                                            <p class="date">June 20, 2017</p>
+                                                            <p class="ellapsis">lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor</p>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="avatar dropdown">
+                                <a href="#" class="drop-title">
+                                    <div class="photo">
+                                        <img src="statics/img/dummy_prof.jpg">
+                                    </div>
+                                    <p class="username"><%=Request.Cookies["fullname"].Value.ToString() %></p>
+                                    <i class="fa fa-angle-down"></i>
+                                </a>
+
+                                <div class="det-avatar animated child">
+                                    <ul>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-user-circle"></i>
+                                                <span>My Profile</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-cogs"></i>
+                                                <span>Account Setting</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-question-circle"></i>
+                                                <span>Help</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <%--<a href="fm_login.aspx">
+                                                <i class="fa fa-sign-out "></i>
+                                                <span>Logout</span>
+                                            </a>--%>
+                                            <a href="#">
+                                                <i class="fa fa-sign-out "></i>
+                                                <span class="logoutApp">Logout</span>
+                                                <asp:Button ID="btLogout" CssClass="btnLogOutCSS" runat="server" OnClick="btLogout_Click" Text="Button" Style="display: none" />
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+            </header>
+
+            <div class="content">
+                <div class="sidebar ">
+                    <div class="icon-menu-left">
+                        <a href="#">
+                            <i class="fa fa-arrow-right"></i>
+                            <p>
+                                Menu
+                            </p>
+                        </a>
+                    </div>
+                    <div class="icon-close">
+                        <a href="#">
+                            <i class="fa fa-close"></i>
+                        </a>
+                    </div>
+                    <div class="sidebar-title">
+
+                        <h2>Wazaran</h2>
+                        <p>Head Office</p>
+
+                    </div>
+                    <div class="menu">
+                        <ul>
+                            <li class="active">
+                                <a href="/fm_loginho2.aspx">
+                                    <i class="fa fa-home"></i>
+                                    <p>Home </p>
+                                </a>
+                            </li>
+                        </ul>
+                        <% int nba = Convert.ToInt16(Session["ba"]);
+                           if (nba == 1)
+                           {
+                        %>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#android" class="dropselect">
+                                    <i class="fa fa-address-card"></i>
+                                    <p>Data Analyst</p>
+                                </a>
+
+                                <ul class="childs">
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_fldvalue.aspx" class="dropselect">Item Supported
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_customer.aspx" class="dropselect">Customer
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <%} %>
+                        <% int nclaim = Convert.ToInt16(Session["claim"]);
+                           if (nclaim == 1)
+                           {
+                        %>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#android" class="dropselect">
+                                    <i class="fa fa-address-card"></i>
+                                    <p>Claim A&P</p>
+                                </a>
+
+                                <ul class="childs">
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_copydiscount.aspx" class="dropselect">Copy Discount/Scheme
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_mstdiscount2.aspx" class="dropselect">Create Discount
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <%} %>
+                        <% int nacc = Convert.ToInt16(Session["acc"]);
+                           if (nacc == 1)
+                           {
+                        %>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#android" class="dropselect">
+                                    <i class="fa fa-address-card"></i>
+                                    <p>Accounting</p>
+                                </a>
+
+                                <ul class="childs">
+                                    <%--<li class="dropdown dropdown-child">
+									<a href="/master/fm_mst_asset.aspx" class="dropselect">
+										Mast Asset
+									</a>
+                                </li>--%>
+                                    <li class="dropdown dropdown-child">
+
+                                        <a href="/master/fm_cashout.aspx" class="dropselect">Item Cashout
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_employee.aspx" class="dropselect">Employee
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_mstcoa.aspx" class="dropselect">Branches COA
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_accmapping.aspx" class="dropselect">Journal Mapping
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_mstsupplier.aspx" class="dropselect">Master Supplier
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/trn_fm_supplier.aspx" class="dropselect">Supplier
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/trn_itemCustomerBlock.aspx" class="dropselect">Item Customer Block
+                                        </a>
+                                    </li>
+                                         <li class="dropdown dropdown-child">
+                                             <a href="/master/trn_fm_ItemCashOut.aspx" class="dropselect">CashOut
+                                             </a>
+                                         </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <%} %>
+                        <% int nHR = Convert.ToInt16(Session["HR"]);
+                           if (nHR == 1)
+                           {
+                        %>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#android" class="dropselect">
+                                    <i class="fa fa-address-card"></i>
+                                    <p>HR Personal</p>
+                                </a>
+
+                                <ul class="childs">
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_mst_employee.aspx" class="dropselect">Employee
+                                        </a>
+                                    </li>
+
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_mst_employeeDependent.aspx" class="dropselect">Employee Dependent
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <%} %>
+
+                        <% int sHRIncentive = Convert.ToInt16(Session["HRIncentive"]);
+                           if (sHRIncentive == 1)
+                           {
+                        %>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#android" class="dropselect">
+                                    <i class="fa fa-address-card"></i>
+                                    <p>HR Benefit</p>
+                                </a>
+
+                                <ul class="childs">
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_activeDriver.aspx" class="dropselect">Active Driver
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_mstkpi.aspx" class="dropselect">KPI
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_kpitarget.aspx" class="dropselect">Target KPI
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_hrdIncetiveRange.aspx" class="dropselect">Incetive Range
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_hrdpaHO.aspx" class="dropselect">Performance Appraisal
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_kpitargetCloning.aspx" class="dropselect">Target Cloning
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_DriverIncentiveSummary.aspx" class="dropselect">Incentive Summary
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_hrdpaHOBSV.aspx" class="dropselect">BCV Incentive
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <%} %>
+
+                        <% int sHRMerchandiser = Convert.ToInt16(Session["HRMerchandiser"]);
+                           if (sHRMerchandiser == 1)
+                           {
+                        %>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#android" class="dropselect">
+                                    <i class="fa fa-address-card"></i>
+                                    <p>Merchandiser HR Benefit</p>
+                                </a>
+                                <ul class="childs">
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_activeMerchandiser.aspx" class="dropselect">Active Merchandiser
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_activeMerchandiserView.aspx" class="dropselect">View Active Merchandiser
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_activeMerchandiserCloning.aspx" class="dropselect">Cloning Active Merchandiser
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_mstkpi.aspx" class="dropselect">KPI</a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_hrdIncetiveRangeMerchandiser.aspx" class="dropselect">Incetive Range
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_kpitargetMerchandiser.aspx" class="dropselect">Target Merchandiser
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/master_fm_kpitargetMerchandiserCloning.aspx" class="dropselect">Target Cloning
+                                        </a>
+                                    </li>									
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_MerchandiserUpload.aspx" class="dropselect" style="display:none;">Merchandiser Upload
+                                        </a>
+                                    </li>
+                                    <%--<li class="dropdown dropdown-child">
+                                        <a href="/master/fm_MerchUpdateAche.aspx" class="dropselect">Behaviour Achievement 
+                                        </a>
+                                    </li>--%>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_hrdpaHO_merch.aspx" class="dropselect">Merchandiser Target Achievement
+                                        </a>
+                                    </li>									
+                                </ul>
+                            </li>
+                        </ul>
+                        <%} %>
+                        <% int sHRProductSPV = Convert.ToInt16(Session["HRProductSPV"]);
+                           if (sHRProductSPV == 1)
+                           {
+                        %>
+                        <ul>
+                            <li class="dropdown">
+                                <a href="#android" class="dropselect">
+                                    <i class="fa fa-address-card"></i>
+                                    <p>Product Supervisor HR Benefit</p>
+                                </a>
+                                <ul class="childs">
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_activeProductSupervisor.aspx" class="dropselect">Active Product Supervisor
+                                        </a>
+                                    </li>
+                                    <li class="dropdown dropdown-child">
+                                        <a href="/master/fm_activeProductSupervisor.aspx" class="dropselect">Product Supervisor Target
+                                        </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <%} %>
+                    </div>
+                </div>
+
+                <div class="main-content container-fluid">
+
+                    <div class="row type-list">
+                        <div class="containers bg-white">
+                            <div class="work-content">
+                                <asp:ContentPlaceHolder ID="mainholder" runat="server">
+                                </asp:ContentPlaceHolder>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <footer class="space-between center">
+                <div class="created">
+                    <p>Created by <a href="#">SBTC</a> © 2017</p>
+                </div>
+            </footer>
+        </div>
+
+
+        <div class="nav-bl">
+        </div>
+    </form>
+</body>
+
+
+</html>

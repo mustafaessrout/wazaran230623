@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+</head>
+<body>
+    <table>
+        <tr>
+            <td style="width:20%;text-align:right">
+                Source
+            </td>
+            <td style="width:3px">:</td>
+            <td style="width:10%">
+                <asp:DropDownList ID="cbsource" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cbsource_SelectedIndexChanged" Width="15em">
+                </asp:DropDownList>
+            </td>
+
+            <td style="width:20%;text-align:right">
+                Payment Type
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:DropDownList ID="cbpaymenttype" runat="server" Width="15em" AutoPostBack="True" OnSelectedIndexChanged="cbpaymenttype_SelectedIndexChanged">
+                </asp:DropDownList>
+
+
+                <asp:Button ID="btsearch" runat="server" CssClass="button2 search" OnClick="btsearch_Click" />
+
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Payment No
+            </td>
+            <td>:</td>
+            <td>
+                <asp:TextBox ID="txpaymentno" runat="server" CssClass="ro" Width="15em"></asp:TextBox>
+
+            </td>
+
+            <td>
+                Status
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:DropDownList ID="cbstatus" runat="server" Width="15em" OnSelectedIndexChanged="cbstatus_SelectedIndexChanged">
+                </asp:DropDownList>
+
+
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                Date
+            </td>
+            <td>:</td>
+            <td>
+                <asp:TextBox ID="dtpayment" runat="server" CssClass="makeitreadonly" Width="15em"></asp:TextBox>
+            </td>
+
+            <td>
+                Tab No.
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <table>
+                    <tr>
+                        <td>
+                            <asp:UpdatePanel ID="UpdatePanel4" runat="server">
+                                <contenttemplate>
+                                    <asp:TextBox ID="txtabno" runat="server" Width="15em"></asp:TextBox>
+                                    <asp:Button ID="bttabsearch" runat="server" CssClass="button2 search" OnClick="bttabsearch_Click" />
+                                </contenttemplate>
+                            </asp:UpdatePanel>
+                        </td>
+
+                    </tr>
+                </table>
+
+
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                HO Bank Account
+            </td>
+            <td>:</td>
+            <td>
+                <asp:DropDownList ID="cbbankHO" runat="server" Width="15em">
+                </asp:DropDownList>
+            </td>
+
+            <td>
+                Bank Transf/Cheque No.
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:TextBox ID="txdocno" runat="server" Width="15em"></asp:TextBox>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                Bank Cheque
+            </td>
+            <td>:</td>
+            <td>
+                <asp:DropDownList ID="cbbankcheq" runat="server" Width="15em">
+                </asp:DropDownList>
+            </td>
+
+            <td>
+                Cheque Due Date
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:TextBox ID="dtcheqdue" runat="server" Width="15em"></asp:TextBox>
+                <asp:CalendarExtender ID="dtcheqdue_CalendarExtender" runat="server" Format="d/M/yyyy" TargetControlID="dtcheqdue">
+                </asp:CalendarExtender>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                HO Record Date
+            </td>
+            <td>:</td>
+            <td>
+                <asp:TextBox ID="dtho" runat="server" Width="15em"></asp:TextBox>
+                <asp:CalendarExtender ID="dtho_CalendarExtender" runat="server" Format="d/M/yyyy" TargetControlID="dtho">
+                </asp:CalendarExtender>
+            </td>
+
+            <td>
+                HO Voucher No.
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:TextBox ID="txhovoucher" runat="server" Width="15em"></asp:TextBox>
+            </td>
+
+        </tr>
+
+        <tr>
+            <td>
+                Bank Account
+            </td>
+            <td>:</td>
+            <td>
+                <asp:DropDownList ID="cbbankacc" runat="server" Width="15em">
+                </asp:DropDownList>
+            </td>
+
+            <td>
+                Manual No.
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:TextBox ID="txmanualno" runat="server" Width="15em"></asp:TextBox>
+            </td>
+
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                Remark
+            </td>
+            <td style="vertical-align:top">:</td>
+            <td colspan="4">
+                <asp:TextBox ID="txremark" runat="server" TextMode="MultiLine"></asp:TextBox>
+            </td>
+
+        </tr>
+        <tr>
+            <td style="vertical-align:top">
+                Paid For
+            </td>
+            <td style="vertical-align:top">:</td>
+            <td colspan="4">
+                <asp:RadioButtonList ID="rdpaidfor" runat="server" AutoPostBack="True" CellPadding="0" CellSpacing="0" OnSelectedIndexChanged="rdpaidfor_SelectedIndexChanged" RepeatDirection="Horizontal">
+                    <asp:listitem value="C">By CUSTOMER</asp:listitem>
+                    <asp:listitem value="G">By GROUP CUSTOMER</asp:listitem>
+                </asp:RadioButtonList>
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Customer
+            </td>
+            <td>:</td>
+            <td>
+                <asp:UpdatePanel ID="UpdatePanel5" runat="server">
+                    <contenttemplate>
+                        <asp:TextBox ID="txcustomer" runat="server" Width="20em"></asp:TextBox>
+                        <asp:DropDownList ID="cbgroup" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cbgroup_SelectedIndexChanged" Width="15em">
+                        </asp:DropDownList>
+                        <div id="divwidth"></div>
+                        <asp:AutoCompleteExtender ID="txcustomer_AutoCompleteExtender" runat="server" ServiceMethod="GetCompletionList" TargetControlID="txcustomer" UseContextKey="True" MinimumPrefixLength="1" CompletionSetCount="1" CompletionInterval="10" EnableCaching="false" FirstRowSelected="false" OnClientItemSelected="ItemSelected" CompletionListElementID="divwidth">
+                        </asp:AutoCompleteExtender>
+                    </contenttemplate>
+                </asp:UpdatePanel>
+
+
+                <asp:HiddenField ID="hdcust" runat="server" />
+            </td>
+            <td>
+                Salesman
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:UpdatePanel ID="UpdatePanel3" runat="server">
+                    <contenttemplate>
+                        <asp:DropDownList ID="cbsalesman" runat="server" AutoPostBack="True" OnSelectedIndexChanged="cbsalesman_SelectedIndexChanged" Width="300px" Enabled="False">
+                        </asp:DropDownList>
+                    </contenttemplate>
+                </asp:UpdatePanel>
+
+
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                Amount
+            </td>
+            <td>:</td>
+            <td>
+                <asp:UpdatePanel ID="UpdatePanel8" runat="server">
+                    <contenttemplate>
+                        <asp:TextBox ID="txamount" runat="server"></asp:TextBox>
+                        <asp:Button ID="btapply" runat="server" Text="Apply" CssClass="button2 add" OnClick="btapply_Click" />
+                    </contenttemplate>
+                </asp:UpdatePanel>
+
+            </td>
+
+            <td>
+                Attachment
+            </td>
+
+            <td>
+                :
+            </td>
+
+            <td>
+                <asp:FileUpload ID="uplpayment" runat="server" />
+            </td>
+
+        </tr>
+        <tr>
+            <td>
+                &nbsp;
+            </td>
+            <td>:</td>
+            <td>
+                <asp:Label ID="lbdiscone" runat="server"></asp:Label>
+            </td>
+
+            <td>
+                &nbsp;
+            </td>
+
+            <td>
+                &nbsp;
+            </td>
+
+            <td></td>
+
+        </tr>
+    </table>
+</body>
+</html>

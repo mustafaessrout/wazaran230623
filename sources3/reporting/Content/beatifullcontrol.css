@@ -1,0 +1,109 @@
+﻿.mydatagrid {
+    width: 80%;
+    border: solid 2px black;
+    min-width: 80%;
+}
+
+.header {
+    background-color: #000;
+    font-family: Calibri;
+    color: White;
+    height: 25px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.rows {
+    background-color: #fff;
+    font-family: Calibri;
+    font-size: small;
+    color: #000;
+    min-height: 15px;
+    text-align: left;
+}
+
+    .rows:hover {
+        background-color: #5badff;
+        color: #fff;
+    }
+
+.mydatagrid a /** FOR THE PAGING ICONS  **/ {
+    background-color: Transparent;
+    padding: 5px 5px 5px 5px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+    .mydatagrid a:hover /** FOR THE PAGING ICONS  HOVER STYLES**/ {
+        background-color: #000;
+        color: #fff;
+    }
+
+.mydatagrid span /** FOR THE PAGING ICONS CURRENT PAGE INDICATOR **/ {
+    background-color: #fff;
+    color: #000;
+    padding: 5px 5px 5px 5px;
+}
+
+.pager {
+    background-color: #5badff;
+    font-family: Calibri;
+    color: White;
+    height: 30px;
+    text-align: left;
+}
+
+.mydatagrid td {
+    padding: 5px;
+}
+
+.mydatagrid th {
+    padding: 5px;
+}
+
+ .jajarangenjang {
+            width: 50%;
+            /*height: 75px;*/
+            background-color: #A1DCF2;
+            color: black;
+            font-weight: bolder;
+            font-family: Calibri;
+            -webkit-transform: skew(170deg);
+            -moz-transform: skew(170deg);
+            -o-transform: skew(170deg);
+            transform: skew(170deg);
+            padding-bottom: 5px;
+            margin-bottom: 0px;
+            border-radius: 5px;
+            /*padding-bottom:0.5em;*/
+            padding-top: 0.2em;
+            margin-left: 0px;
+            padding-left: 5px;
+            /*outline-offset:1px;*/
+        }
+
+        .h-divider{
+             margin-top:0px;
+             margin-bottom:2em;
+             height:2px;
+             background-color:#A1DCF2;
+             width:100%;
+             /*border-top:1px solid #6f8dac;*/
+             border-top:3px solid #6f8dac;
+             /*padding-bottom:1em;
+             padding-top:1em;*/
+            }
+         [input]
+         {
+             display:normal;
+         }
+         .ro
+         {
+           
+             pointer-events:none;
+             background-color: silver;
+         }
+
+        
+

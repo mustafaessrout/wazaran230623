@@ -1,0 +1,7 @@
+
+@font-face {
+  font-family: 'Khula';
+  src: url('Khula-Regular.woff2') format('woff2'),
+       url('Khula-Regular.woff') format('woff'),
+       url('Khula-Regular.ttf') format('truetype');
+}

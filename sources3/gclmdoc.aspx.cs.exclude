@@ -1,0 +1,251 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+
+public partial class gclmdoc : System.Web.UI.Page
+{
+    cbll bll = new cbll();
+    creport rep = new creport();
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+    }
+    protected void btgn_Click(object sender, EventArgs e)
+    {
+        string sPath = @"d:/images/claim_doc/";
+        string oldCL = txclaim.Text;
+        try
+        {
+            List<cArrayList> arr = new List<cArrayList>();
+            if (RadioButtonList1.SelectedValue == "0")
+            {
+                try
+                {
+                string sPdfName = Request.Cookies["sp"].Value.ToString() + "-" + txclaim.Text + "-" + "P09" + ".pdf";
+                arr.Clear();
+                arr.Add(new cArrayList("@claim_no", txclaim.Text));
+                arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                arr.Add(new cArrayList("@rp_typ", null));
+                rep.vShowReportToPDF("rp_claim_invoice.rpt", arr, sPath + sPdfName);
+                int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                txclaim.Text = "CL" + x.ToString();
+                }
+                catch (Exception ex)
+                {
+                    bll.vHandledError(ref ex, Request.Cookies["sp"].Value.ToString()+" : GENERATE CLAIM INVOICE");
+                }
+            }
+            else if (RadioButtonList1.SelectedValue == "1")
+            {
+                try
+                {
+                    string sPdfName1 = Request.Cookies["sp"].Value.ToString() + "-" + txclaim.Text + "-" + "P04" + ".xls";
+                    arr.Add(new cArrayList("@claim_no", txclaim.Text));
+                    arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                    string claim_typ = bll.vLookUp("select distinct disc_typ from tclaim_dtl where claim_no='" + txclaim.Text + "' and salespointcd='" + Request.Cookies["sp"].Value.ToString() + "'");
+                    // if (claim_typ == "FG")
+                    // {
+                    //     rep.vShowReportToEXCEL("rp_claimFG.rpt", arr, sPath + sPdfName1);
+                    // }
+                    if (claim_typ == "CH")
+                    {
+                        rep.vShowReportToEXCEL("rp_claimDC.rpt", arr, sPath + sPdfName1);
+                    }
+                    else if (claim_typ == "FG")
+                    {
+                        rep.vShowReportToEXCEL("rp_claimFG.rpt", arr, sPath + sPdfName1);
+                    }
+                    else if (claim_typ == "BA")
+                    {
+                        rep.vShowReportToEXCEL("rp_claimFG.rpt", arr, sPath + sPdfName1);
+                    }
+                    int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                    bll.vLookUp("update tclaim_doc set fileloc='" + sPdfName1 + "' where claim_no='" + txclaim.Text + "' and doc_cd='P04'");
+                    txclaim.Text = "CL" + x.ToString();
+                }
+                catch (Exception ex)
+                {
+                    bll.vHandledError(ref ex, Request.Cookies["sp"].Value.ToString()+" : GENERATE CLAIM");
+                }
+            }
+            else if (RadioButtonList1.SelectedValue == "2")
+            {
+                string sPdfName1 = Request.Cookies["sp"].Value.ToString() + "-" + txclaim.Text + "-" + "P04" + ".xls";
+                arr.Add(new cArrayList("@claim_no", txclaim.Text));
+                arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                arr.Add(new cArrayList("@customer", null));
+                rep.vShowReportToEXCEL("rp_claimCashOut.rpt", arr, sPath + sPdfName1);
+
+                int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                bll.vLookUp("update tclaim_doc set fileloc='" +  sPdfName1 + "' where claim_no='" + txclaim.Text + "' and doc_cd='P04'");
+                txclaim.Text = "CL" + x.ToString();
+            }
+            else if (RadioButtonList1.SelectedValue == "3")
+            {
+                try
+                {
+                string sPdfName1 = Request.Cookies["sp"].Value.ToString() + "-" + txclaim.Text + "-" + "P04" + ".xls";
+                arr.Add(new cArrayList("@claim_no", txclaim.Text));
+                arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                rep.vShowReportToEXCEL("rp_claimsumcndn.rpt", arr, sPath + sPdfName1);
+
+                int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                bll.vLookUp("update tclaim_doc set fileloc='" + sPdfName1 + "' where claim_no='" + txclaim.Text + "' and doc_cd='P04'");
+                txclaim.Text = "CL" + x.ToString();
+                }
+                catch (Exception ex)
+                {
+                    bll.vHandledError(ref ex, Request.Cookies["sp"].Value.ToString()+" : GENERATE CLAIM (SUMMARY CNDN)");
+                }
+            }
+            else if (RadioButtonList1.SelectedValue == "4")
+            {
+                try
+                {
+                    string sPdfName1 = Request.Cookies["sp"].Value.ToString() + "-" + txclaim.Text + "-" + "P02" + ".pdf";
+                    string prop_get = bll.vLookUp("select prop_no from tmst_claim where claim_no='" + txclaim.Text + "'");
+                    string prop_cust = bll.vLookUp("select rdcust from tmst_proposal where prop_no = '" + prop_get + "'");
+                    string prop_item = bll.vLookUp("select rditem from tmst_proposal where prop_no = '" + prop_get + "'");
+
+                    arr.Add(new cArrayList("@prop_no", prop_get));
+                    arr.Add(new cArrayList("@cust", prop_cust));
+                    arr.Add(new cArrayList("@product", prop_item));
+                    arr.Add(new cArrayList("@salespoint", null));
+                    arr.Add(new cArrayList("@dbp", "no"));
+                    arr.Add(new cArrayList("@vendor", null));
+                    arr.Add(new cArrayList("@cost", null));
+                    arr.Add(new cArrayList("@promo", null));
+                    arr.Add(new cArrayList("@year", null));
+                    arr.Add(new cArrayList("@month", null));
+                    rep.vShowReportToPDF("rp_proposal.rpt", arr, sPath + sPdfName1);
+
+                    int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                    txclaim.Text = "CL" + x.ToString();
+
+                    List<cArrayList> arrProposal = new List<cArrayList>();
+                    arr.Add(new cArrayList("@claim_no", txclaim.Text));
+                    arr.Add(new cArrayList("@salespoint", Request.Cookies["sp"].Value.ToString()));
+                    arr.Add(new cArrayList("@file", sPdfName1));
+                    arr.Add(new cArrayList("@doc_cd", "P02"));
+
+                    if (int.Parse(bll.vLookUp("select count(*) as doc from tclaim_doc where claim_no='" + txclaim.Text + "' and doc_cd='P02'")) == 0)
+                    {
+                        bll.vInsertClaimProposal(arrProposal);
+                        bll.vLookUp("insert into tclaim_doc values ('" + txclaim.Text + "','P02','1','" + Request.Cookies["sp"].Value.ToString() + "','" + sPdfName1 + "','Proposal Approved')");
+                    }
+                    else
+                    {Queryable7
+                        bll.vLookUp("update tclaim_doc set fileloc='" + sPdfName1 + "' where claim_no='" + txclaim.Text + "' and doc_cd='P02'");
+                    }
+
+
+
+                }
+                catch (Exception ex)
+                {
+                    bll.vHandledError(ref ex, Request.Cookies["sp"].Value.ToString()+" : GENERATE CLAIM (Proposal Approved)");
+                }
+                
+            }
+            else
+            {
+                string sPdfName = Request.Cookies["sp"].Value.ToString() + "-" + txclaim.Text + "-" + "P09" + ".pdf";
+                arr.Clear();
+                arr.Add(new cArrayList("@claim_no", txclaim.Text));
+                arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                rep.vShowReportToPDF("rp_claim_invoice.rpt", arr, sPath + sPdfName);
+                //int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                // txclaim.Text = "CL" + x.ToString();
+                //////////////////////
+                arr.Clear();
+                string sPdfName1 = Request.Cookies["sp"].Value.ToString() + "-" + txclaim.Text + "-" + "P04" + ".xls";
+                arr.Add(new cArrayList("@claim_no", txclaim.Text));
+                arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                string claim_typ = bll.vLookUp("select distinct disc_typ from tclaim_dtl where claim_no='" + txclaim.Text + "' and salespointcd='" + Request.Cookies["sp"].Value.ToString() + "'");
+                if (claim_typ == "FG")
+                {
+                    rep.vShowReportToEXCEL("rp_claimFG.rpt", arr, sPath + sPdfName1);
+                }
+                else if (claim_typ == "CH")
+                {
+                    rep.vShowReportToEXCEL("rp_claimDC.rpt", arr, sPath + sPdfName1);
+                }
+                int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                bll.vLookUp("update tclaim_doc set fileloc='" + sPdfName1 + "' where claim_no='" + txclaim.Text + "' and doc_no='P09'");
+                txclaim.Text = "CL" + x.ToString();
+            }
+            Response.Write("<script> window.open('fm_invByProposal.aspx?number="+oldCL+"','_blank'); </script>");
+        }
+        catch (Exception ex)
+        {
+            List<cArrayList> arr = new List<cArrayList>();
+            arr.Add(new cArrayList("@err_source", "Claim"));
+            arr.Add(new cArrayList("@err_description", ex.Message.ToString() + sPath));
+            bll.vInsertErrorLog(arr);
+        }
+    }
+    protected void Button1_Click(object sender, EventArgs e)
+    {
+        int tot;
+        string claimno;
+        if(rdyear.SelectedValue.ToString()=="2016")
+        {
+            tot = Convert.ToInt16(bll.vLookUp("select count(claim_no) from tmst_claim where discount_mec in ('CH','PC','FG') and claim_no like '%'+'CL16'+'%'"));
+            claimno = "CL1600001";
+        }
+        else
+        {
+            tot = Convert.ToInt16(bll.vLookUp("select count(claim_no) from tmst_claim where discount_mec in ('CH','PC','FG') and claim_no like '%'+'CL17'+'%'"));
+            claimno = "CL1700001";
+        }
+        
+        string sPath = bll.sGetControlParameter("image_path") + @"\claim_doc\";
+        try
+        {
+            
+            int x1 = 0;
+            List<cArrayList> arr = new List<cArrayList>();
+            while (tot>x1)
+            {
+                string sPdfName = Request.Cookies["sp"].Value.ToString() + "-" + claimno + "-" + "P09" + ".pdf";
+                arr.Clear();
+                arr.Add(new cArrayList("@claim_no", claimno));
+                arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                rep.vShowReportToPDF("rp_claim_invoice.rpt", arr, sPath + sPdfName);
+                //int x = Convert.ToInt32(txclaim.Text.Remove(0, 2)) + 1;
+                // txclaim.Text = "CL" + x.ToString();
+                //////////////////////
+                arr.Clear();
+                string sPdfName1 = Request.Cookies["sp"].Value.ToString() + "-" + claimno + "-" + "P04" + ".xls";
+                arr.Add(new cArrayList("@claim_no", claimno));
+                arr.Add(new cArrayList("@salespointcd", Request.Cookies["sp"].Value.ToString()));
+                string claim_typ = bll.vLookUp("select distinct disc_typ from tclaim_dtl where claim_no='" + claimno + "' and salespointcd='" + Request.Cookies["sp"].Value.ToString() + "'");
+                if (claim_typ == "FG")
+                {
+                    rep.vShowReportToEXCEL("rp_claimFG.rpt", arr, sPath + sPdfName1);
+                }
+                else if (claim_typ == "CH")
+                {
+                    rep.vShowReportToEXCEL("rp_claimDC.rpt", arr, sPath + sPdfName1);
+                }
+                int x = Convert.ToInt32(claimno.Remove(0, 2)) + 1;
+                bll.vLookUp("update tclaim_doc set fileloc='" + sPdfName1 + "' where claim_no='" + claimno + "' and doc_cd='P04'");
+                claimno = "CL" + x.ToString();
+                x1 = x1 + 1;
+            }
+
+            Response.Write("<script language='javascript'>window.alert('CLAIM DOCS Has been Created');</script>");
+        }
+        catch (Exception ex)
+        {
+            List<cArrayList> arr = new List<cArrayList>();
+            arr.Add(new cArrayList("@err_source", "Claim"));
+            arr.Add(new cArrayList("@err_description", ex.Message.ToString() + sPath));
+            bll.vInsertErrorLog(arr);
+        }
+
+    }
+}

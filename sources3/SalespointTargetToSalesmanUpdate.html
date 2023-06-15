@@ -1,0 +1,88 @@
+﻿
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <img src="http://indomieksa.com/sbtc/wp-content/uploads/2013/09/logo.png" /><br /><br />
+    <div style="border-top:3px solid #22BCE5">&nbsp;</div>
+
+    <span style="font-family:Arial;font-size:10pt">
+        Hello <b>{UserName}</b>,<br /><br />
+        <b>Sales Target to Salesman</b><br /><br />
+        Branch Name :- <b>{BranchName}</b>,<br /><br />
+        Period :- <b>{Period}</b>,<br /><br />
+        Salesman :- <b>{Salesman}</b>,<br /><br />
+    </span>
+    <table>
+        <tr >
+            <th><b>Product Group </b></th>
+            <th><b>HO Target</b></th>
+            <th><b>Priority </b></th>
+            <th><b>Min. Loading</b></th>
+            <th><b>UptoDate</b></th>
+            <th><b>Achievement </b></th>
+            <th><b>Sales Target</b></th>
+            <th><b>Tablet target</b></th>
+            <th><b>Stock</b></th>
+            
+        </tr>
+        <tr>
+            <td style="margin-left: 80px">
+                {ProductGroup}
+            </td>
+            <td style="margin-left: 40px">
+                {HeadfficeTarget}
+
+            </td>
+            <td style="margin-left: 40px">
+                {Priority} 
+            </td>
+            <td style="margin-left: 80px">
+                {MinTarget}
+            </td>
+
+            <td style="margin-left: 80px">
+                {UptoDate} 
+            </td>
+
+            <td>
+                {AlreadyUsed}
+
+            </td>
+            <td>
+                {SalesTarget}
+            </td>
+            
+            <td>
+                {TabletAdd}
+            </td>
+            <td>
+                {stock}
+            </td>
+            <td>
+           </td>
+        </tr>
+    </table>
+</body>
+</html>

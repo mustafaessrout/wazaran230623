@@ -1,0 +1,313 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="trn.master.cs" Inherits="trn_master" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    	
+	<script src="statics/js/jquery-3.2.1.min.js"></script>
+	<script src="statics/js/index.js"></script>
+    <link rel="stylesheet" type="text/css" href="statics/css/metro.css"/>
+	<link rel="stylesheet" href="css/font-awesome.min.css"/>
+ <%--   <script src="Content/jquery.min.js"></script>--%>
+	<%--<link rel="stylesheet" type="text/css" href="statics/css/bootstrap.css"/>--%>
+	<link rel="stylesheet" type="text/css" href="statics/css/bootstrap-theme.css"/>
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+	<link rel="stylesheet" type="text/css" href="statics/css/animate.css"/>
+	<link rel="stylesheet" type="text/css" href="statics/css/style.css"/>
+	<link rel="stylesheet" type="text/css" href="statics/css/responsive.css"/>
+	<link rel="stylesheet" type="text/css" href="statics/css/header2.css"/>
+	<%--<link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet"/>--%>
+
+	<%--<script src="bootstrap.min.js"></script>--%>
+	<script src="statics/js/metro.min.js"></script>
+    <link href="statics/css/font-awesome.min.css" rel="stylesheet" />
+	<title>Wazaran Portal</title>
+     <link href="../css/sweetalert.css" rel="stylesheet" />
+    <script src="../js/sweetalert.min.js"></script>
+    <script>
+        function openreport(url) {
+            window.open(url, "myrep");
+        }
+
+        function PopupCenter(url, title, w, h) {
+            // Fixes dual-screen position                         Most browsers      Firefox
+            var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+            var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+            var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+            var top = ((height / 2) - (h / 2)) + dualScreenTop;
+            var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+            // Puts focus on the newWindow
+            if (window.focus) {
+                newWindow.focus();
+            }
+        }
+
+        function MsgWarning(sCap, sMsg) {
+            sweetAlert(sCap, sMsg, 'warning');
+        }
+
+
+        function MsgSuccess(sCap, sMsg) {
+            sweetAlert(sCap, sMsg, 'success');
+        }
+        $(document).ready(function () {
+            console.log("sd1");
+            $(document).on('click', '.logoutApp', function () {
+                console.log("sd2");
+                $('.btnLogOutCSS').click();
+            });
+        });
+   </script>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+ <body class="align-strech cntner">
+	<form id="frmmain" runat="server" style="width:100%">
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server"></asp:ToolkitScriptManager>
+	<div class="full">
+		<div class="btn-nav ">
+			<a href="#">
+				<i class="fa fa-bars" aria-hidden="true"></i>
+			</a>
+		</div>
+
+		<header>
+			<div class="logo">
+				<a href="#">
+					<img src="statics/img/logo1.png"/>
+				</a>
+			</div>
+			<div class="header-menu">
+				<div class="hidden-lg hidden-md  pull-right icon-hamburger">
+					<a href="#">
+						<i class="fa fa-bars"></i>
+						<p>
+							Menu
+						</p>
+					</a>
+				</div>
+				<div class="menus menu-burger">
+					<div class="header-menu">
+						<div class="close-burger hidden-lg hidden-md ">
+							<a href="#" class=""><i class="fa fa-close"></i></a>
+						</div>
+						<a href="#">link</a>
+					
+						<div class="dropdown">
+							<div class="drop-title">
+								<a href="">dropdown title</a>
+								<i class="fa fa-angle-down" aria-hidden="true"></i>
+							</div>
+							<ul class="animated child">
+								<li>
+									<a href="#">Head Office ERP</a>
+								</li>
+								<li>
+									<a href="#">linka</a>
+								</li>
+							</ul>
+						</div>
+			
+						<div class="search">
+						<%--	<form>--%>
+							
+								<input type="text" name="" class="animated" placeholder="search"/>
+								<button type="submit">
+									<i class="fa fa-search"></i>
+								</button>
+					<%--		</form>--%>
+						</div>
+
+						<div class="notifications dropdown">
+							<a href="#">
+								<i class="fa fa-globe"></i>
+								<span class="badge">10</span>
+							</a>
+
+							<div class="notif animated child">
+								<div class="ntf">
+									<div class="tab-title">
+										<a href="#">Notification</a>
+									</div>
+									<div class="tab-container">
+										<ul id="notif-content">
+											<li>
+												<div class="choice">
+													<i class="fa fa-envelope"></i>
+													<div class="tab-content">
+														<p class="title">Loerme ipsum dolor</p>
+														<p class="date">June 20, 2017</p>
+														<p class="ellapsis">lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor</p>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="choice">
+													<i class="fa fa-envelope"></i>
+													<div class="tab-content">
+														<p class="title">Loerme ipsum dolor</p>
+														<p class="date">June 20, 2017</p>
+														<p class="ellapsis">lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor lorem ipsum dolor</p>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="avatar dropdown">
+							<a href="#" class="drop-title">
+								<div class="photo">
+									<img src="statics/img/dummy_prof.jpg">
+								</div>
+                                <%if (Request.Cookies["exh_cd"] != null){ %>
+								<p class="username"><%=Request.Cookies["usr_nm"].Value.ToString() %></p>:<p>System date: <%=Request.Cookies["exh_dt"].Value.ToString() %></p>
+                                <%} %>
+								<i class="fa fa-angle-down"></i>
+							</a>
+
+							<div class="det-avatar animated child">
+								<ul>
+									<li>
+										<a href="#">
+											<i class="fa fa-user-circle"></i>
+											<span>My Profile</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-cogs"></i>
+											<span>Account Setting</span>
+										</a>
+									</li>
+									<li>
+										<a href="#">
+											<i class="fa fa-question-circle"></i>
+											<span>Help</span>
+										</a>
+									</li>
+									<li>
+										 <%--<a href="fm_login.aspx">
+                                                <i class="fa fa-sign-out "></i>
+                                                <span>Logout</span>
+                                            </a>--%>
+                                             <a href="#">
+                                                <i class="fa fa-sign-out "></i>
+                                                <span class="logoutApp">Logout</span>
+                                                <asp:Button ID="btLogout" CssClass="btnLogOutCSS" runat="server" OnClick="btLogout_Click" Text="Button" Style="display: none" />
+                                            </a>
+									</li>
+								</ul>
+							</div>
+						</div>
+
+
+					</div>
+				</div>
+
+			</div>
+		</header>
+
+		<div class="content">
+			<div class="sidebar ">
+				<div class="icon-menu-left">
+					<a href="#">
+						<i class="fa fa-arrow-right"></i>
+						<p>
+							Menu
+						</p>
+					</a>
+				</div>
+				<div class="icon-close">
+					<a href="#">
+						<i class="fa fa-close"></i>
+					</a>
+				</div>
+				<div class="sidebar-title">
+
+					<h2>Wazaran</h2>
+					<p>Head Office</p>
+
+				</div>
+				<div class="menu">
+					<ul>
+						<li class="active">
+							<a href="default.aspx">
+								<i class="fa fa-home"></i>
+								<p>Home </p>
+							</a>
+						</li>
+						
+						<li class="dropdown">
+							<a href="#android" class="dropselect">
+								<i class="fa fa-address-card"></i>
+								<p>Transaction</p>
+							</a>
+
+							<ul class="childs">
+								
+                                 
+                                   <li>
+									<a href="/trn/fm_po_transaction.aspx">
+										HO SO Transaction
+									</a>
+								</li>
+                                 <li>
+									<a href="/trn/fm_po_wh.aspx">
+										DO Transaction
+									</a>
+								</li>
+                                
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<div class="main-content container-fluid">
+			
+				<div class="row type-list">
+					<div class="containers bg-white">
+						
+						
+						<div class="work-content">
+							<asp:ContentPlaceHolder id="mainholder" runat="server">
+        
+                            </asp:ContentPlaceHolder>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		
+
+		<footer class="space-between center">
+			<div class="created">
+				<p>Created by <a href="#">SBTC</a> © 2017</p>
+			</div>
+		<!-- 	<div class="logo">
+				<img src="img/logo1.png">
+			</div> -->
+		</footer>
+	</div>
+	
+
+	<div class="nav-bl">	
+	</div>
+        </form>
+
+</body>
+        
+
+</html>

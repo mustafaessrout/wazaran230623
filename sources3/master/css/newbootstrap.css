@@ -1,0 +1,58 @@
+﻿  .h-divider{
+     margin-top:0px;
+     margin-bottom:2em;
+     height:2px;
+     background-color:#A1DCF2;
+     width:100%;
+     border-top:1px solid #6f8dac;
+     /*padding-bottom:1em;
+     padding-top:1em;*/
+    }
+
+   .mygrid
+    {
+        border: 1px solid #A1DCF2;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        overflow: hidden;
+        font-family:Calibri;
+    }
+    .mygrid td, .rounded_corners th
+    {
+        border: 1px solid #A1DCF2;
+        font-family: Calibri;
+        font-size: 10pt;
+        text-align: center;
+    }
+    .mygrid table table td
+    {
+        border-style: none;
+    }
+    .mygridro{
+        border: 1px solid #A1DCF2;
+        -webkit-border-radius: 8px;
+        -moz-border-radius: 8px;
+        border-radius: 8px;
+        overflow: hidden;
+        font-family:Calibri;
+          pointer-events:none;
+   
+    }
+.navi {
+    text-align: center;
+    width: 100%;
+    padding-top: 7px;
+        }
+.ro {
+    background-color: silver !important;
+    color: blue;
+    /*font-weight: 700;*/
+    pointer-events: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.divhid {
+    display:none;
+}

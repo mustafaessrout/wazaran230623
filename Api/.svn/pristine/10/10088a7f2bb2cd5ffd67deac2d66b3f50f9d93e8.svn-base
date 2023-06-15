@@ -1,0 +1,32 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using System.Net;
+using Newtonsoft.Json;
+
+namespace api.Controllers
+{
+    public class CndnController : Controller
+    {
+        cbll bll = new cbll();
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public JsonResult Reporthomemo(string c)
+        {
+            List<cArrayList> arr = new List<cArrayList>();
+            arr.Add(new cArrayList("@memo_no", c));
+            return Json(bll.lVatHoMemo(arr));
+           
+        }
+        public JsonResult Externalvat()
+        {
+            return Json(bll.lExternalVatRequest());
+        }
+    }
+}
+ 

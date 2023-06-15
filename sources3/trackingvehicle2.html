@@ -1,0 +1,185 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" />
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=AIzaSyDbFnnD5nwqBJVeQn_aD68irHKryMWPp2w&callback=initialize"></script>
+    <script type="text/javascript">
+
+        var map;
+        var marker;
+        var position = [33.6312622, -7.5133248];
+        var lastposition = [];
+        var allsalesman = [];
+        var allmarkers = [];
+
+        function initialize() {
+
+            var latlng = new google.maps.LatLng(position[0], position[1]);
+            var myOptions = {
+                zoom: 12,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+            marker = new google.maps.Marker({
+                position: latlng,
+                map: map,
+                title: "Depo",
+                icon: 'truck.png'
+            });
+            
+            //const contentString = '<b>Depo</b>';
+            //const infowindow = new google.maps.InfoWindow({
+            //    content: contentString
+            //});
+           
+            //marker.addListener("click", () => {
+            //    infowindow.open({
+            //        anchor: marker,map
+            //    });
+            //});
+            //google.maps.event.addListener(marker, 'click', (function (marker, content, infowindow) {
+            //    return function () {
+            //        infowindow.setContent(content);
+            //        infowindow.open(map, marker);
+            //    };
+            //})(marker, content, infowindow));  
+
+            //allmarkers.push(marker);
+            //lastposition = position;
+            //google.maps.event.addListener(map, 'click', function (me) {
+            //    var result = [me.latLng.lat(), me.latLng.lng()];
+            //    transition(result);
+            //});
+            // alert('go init');
+        }
+        var redraw = function (payload) {
+            var location = JSON.parse(payload.message.msg);
+            lat = location.lat;
+            lng = location.lng;
+            emp = location.emp_cd;
+
+            var valueToPush = {}; // or "var valueToPush = new Object();" which is the same
+            valueToPush["lat"] = lat;
+            valueToPush["lng"] = lng;
+            valueToPush["emp"] = emp;
+            valueToPush["lastpositionlat"] = lat;
+            valueToPush["lastpositionlng"] = lng;
+            var _check = false;
+
+            for (let index = 0; index < allsalesman.length; ++index) {
+                if (allsalesman[index].emp == emp) {
+
+                    _check = true;
+                    allsalesman[index].lastpositionlat = allsalesman[index].lat;
+                    allsalesman[index].lastpositionlng = allsalesman[index].lng;
+                    allsalesman[index].lat = lat;
+                    allsalesman[index].lng = lng;
+                    allsalesman[index].emp = emp;
+                    //alert(allmarkers[0].title);
+                    for (let idx = 0; idx < allmarkers.length; ++idx) {
+                        if (allmarkers[idx].title == allsalesman[index].emp) {
+
+                            //var lllg = new google.maps.LatLng(parseFloat(lat), parseFloat(lng));
+                            var result = [lat, lng];
+                            transition(result, allsalesman[index].lastpositionlat, allsalesman[index].lastpositionlng,allmarkers[idx]);
+                            //allmarkers[idx].setPosition(lllg);
+                        }
+                    }
+
+                    //var result = [lat, lng];
+                    //transition(result, allsalesman[index].lastpositionlat, allsalesman[index].lastpositionlng, );
+                    //alert('old salesman registered !');
+                }
+            }
+
+            if (_check == false) {
+                allsalesman.push(valueToPush);
+                // for (i = 0; i < allsalesman.length; i++) {
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(parseFloat(lat), parseFloat(lng)),
+                    map: map,
+                    icon: 'truck4.png',
+                    title: emp
+                });
+                
+                const contentString = '<b>Salesman Code : '+emp+'</b></br>Canvasser : ';
+                
+                addInfoWindow(marker, contentString);
+                allmarkers.push(marker);
+
+                function addInfoWindow(marker, message) {
+
+                    var infoWindow = new google.maps.InfoWindow({
+                        content: message
+                    });
+
+                    google.maps.event.addListener(marker, 'click', function () {
+                        infoWindow.open(map, marker);
+                    });
+                }
+            }
+        };
+
+        var numDeltas = 1000; //ori 100
+        var delay = 40; //milliseconds ori 10
+        var i = 0;
+        var deltaLat;
+        var deltaLng;
+        function transition(result, lastlat, lastlng, mkr) {
+            i = 0;
+            //deltaLat = (result[0] - lastposition[0]) / numDeltas;
+            //deltaLng = (result[1] - lastposition[1]) / numDeltas;
+            deltaLat = (parseFloat(result[0]) - parseFloat(lastlat)) / numDeltas;
+            deltaLng = (parseFloat(result[1]) - parseFloat(lastlng)) / numDeltas;
+            moveMarker(lastlat, lastlng, mkr);
+        }
+
+        function moveMarker(lstlat, lstlng, mkr) {
+            llat = lstlat+ deltaLat;
+            llng = lstlng+ deltaLng;
+            var latlng = new google.maps.LatLng(parseFloat(llat), parseFloat(llng));
+            /*marker.setPosition(latlng);*/
+            mkr.setPosition(latlng);
+            if (i != numDeltas) {
+                i++;
+                setTimeout(moveMarker(llat, llng, mkr), delay);
+            }
+        }
+
+        var pnChannel = "Channel-Barcelona";
+        var pubnub = new PubNub({
+            publishKey: 'pub-c-07c8f1e7-973f-4dcf-b70f-99700208b764',
+            subscribeKey: 'sub-c-27aab402-3c50-11e9-bbfc-8200a0d642df'
+        });
+
+        pubnub.subscribe({ channels: [pnChannel] });
+        pubnub.addListener({ message: redraw });
+
+        $(document).ready(function () {
+
+            initialize();
+        });
+    </script>
+    <style>
+        #map_canvas {
+            width: 1400px;
+            height: 700px;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div id="map_canvas"></div>
+
+    <div>click the map to animate</div>
+
+</body>
+</html>

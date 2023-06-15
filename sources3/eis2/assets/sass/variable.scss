@@ -1,0 +1,120 @@
+/* color */
+$header : #2196f3;
+$white : #fff;
+$black : #212529;
+$secondary : #727b84;
+$warning : #ffc107;
+$light: #e2e6ea;
+$dark : #2b373a;
+$primary: #2196f3;
+$danger: #f44336;
+$success: #4caf50;
+$info: #00bcd4;
+$disabled: #868e96;
+
+$grey : #999;
+$lightGrey: #f5f5f5;
+$lightGreyLine: #ddd;
+
+$lightBlue: #7d91ff;
+
+$hovergrey : #f5f5f5;
+
+
+$background-page :  #f5f5f5;
+$fontfamliy1 : 'Open Sans';
+
+
+$dropdownitemactive : #fff;
+$paddingItemDropdown : 8px 5px 8px 5px;
+
+$dateHead : $dark;
+
+$translate: all .3s;
+
+/*mixin*/
+@mixin img-avatar($lngth) {
+  width: $lngth;
+  height: $lngth;
+  overflow: hidden;
+
+  img{
+    width: $lngth+20px;
+  }
+}
+
+// button
+
+
+@mixin btn($color) {
+  background-color: $color;
+  border-color: $color;
+  &:hover{
+    background-color: darken( $color, 10% );
+    border-color: darken( $color, 10% );
+  }
+}
+
+@mixin btn-outline($color) {
+  background-color: transparent;
+  border-color: $color;
+  &:hover{
+    background-color: $color;
+  }
+}
+
+@mixin ghostBtn($prm) {
+  color: #fff;
+  border-color: $prm;
+  background: $prm;
+}
+
+
+
+// pagination
+@mixin pageColor($color) {
+  .page-link{
+    color: $color;
+    border-color: $color;
+    transition: all .3s;
+    &:hover{
+      color: #fff;
+      background-color: $color;
+    }
+  }
+}
+
+// badge
+@mixin badge($borderColor, $bgColor, $color) {
+    border-radius: 100px;
+    font-size: 10px;
+
+    background-color: $bgColor;
+    color: $color;
+    border: 1px solid $borderColor;
+}
+@mixin normalBadge($color) {
+  @include badge(transparent,$color, #fff);
+}
+
+@mixin badgeGhost($color) {
+  @include badge($color,transparen,$color);
+}
+
+
+
+// must have animate.css
+@mixin animated($time, $animated){
+  animation-duration: ($time);
+  animation-fill-mode: both;
+  animation-name: ($animated);
+}
+
+
+// linear gradient
+@mixin gradient($from, $to, $deg) {
+  background-color: $from !important;
+  background-image: -moz-linear-gradient(left, $from, $to) !important;
+  background-image: -webkit-linear-gradient(left, $from, $to) !important;
+  background-image: -o-linear-gradient(left, $from, $to) !important;
+}

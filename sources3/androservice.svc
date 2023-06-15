@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="androservice" CodeBehind="~/App_Code/androservice.cs" %>

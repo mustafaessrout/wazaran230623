@@ -1,0 +1,1266 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="site.master.cs" Inherits="site" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+
+    <title>Wazaran System</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/sweetalert.min.js"></script>
+    <script src="js/index.js"></script>
+    <script src="js/modernizr.custom.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/sweetalert.css" rel="stylesheet" />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/custom/style.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/custom/metro.css" rel="stylesheet" />
+    <link href="css/custom/animate.css" rel="stylesheet" />
+    <!--custom js-->
+    <link rel="stylesheet" type="text/css" href="css/default.css" />
+    <link rel="stylesheet" type="text/css" href="css/component.css" />
+   
+       /* Make it a marquee *
+         <style type="text/css">
+             .messagealert {
+                 width: 100%;
+                 position: fixed;
+                 top: 0px;
+                 z-index: 100000;
+                 padding: 0;
+                 font-size: 15px;
+             }
+         </style>
+
+    <script type="text/javascript">
+        function ShowMessage(message, messagetype) {
+            var cssclass;
+            switch (messagetype) {
+                case 'Success':
+                    cssclass = 'alert-success'
+                    break;
+                case 'Error':
+                    cssclass = 'alert-danger'
+                    break;
+                case 'Warning':
+                    cssclass = 'alert-warning'
+                    break;
+                default:
+                    cssclass = 'alert-info'
+            }
+        }
+        function PopupCenter(url, title, w, h) {
+            // Fixes dual-screen position                         Most browsers      Firefox
+            var dualScreenLeft = window.screenLeft != undefined ? window.screenLeft : screen.left;
+            var dualScreenTop = window.screenTop != undefined ? window.screenTop : screen.top;
+
+            var width = window.innerWidth ? window.innerWidth : document.documentElement.clientWidth ? document.documentElement.clientWidth : screen.width;
+            var height = window.innerHeight ? window.innerHeight : document.documentElement.clientHeight ? document.documentElement.clientHeight : screen.height;
+
+            var left = ((width / 2) - (w / 2)) + dualScreenLeft;
+            var top = ((height / 2) - (h / 2)) + dualScreenTop;
+            var newWindow = window.open(url, title, 'scrollbars=yes, width=' + w + ', height=' + h + ', top=' + top + ', left=' + left);
+
+            // Puts focus on the newWindow
+            if (window.focus) {
+                newWindow.focus();
+            }
+        }
+        function MsgWarning(sCap, sMsg) {
+            sweetAlert(sCap, sMsg, 'warning');
+        }
+
+        function MsgSuccess(sCap, sMsg) {
+            sweetAlert(sCap, sMsg, 'success');
+        }
+    </script>
+
+    <style>
+        .marquee {
+            background: #fff;
+            box-shadow: 0 0 1px #777;
+            width: 800px;
+            margin: 2px auto;
+            white-space: nowrap;
+            overflow: hidden;
+            box-sizing: border-box;
+            border: 1px green none;
+        }
+
+            .marquee span {
+                display: inline-block;
+                padding-left: 100%;
+                text-indent: 0;
+                border: 1px red none;
+                animation: marquee 15s linear infinite;
+            }
+
+                .marquee span:hover {
+                    animation-play-state: paused
+                }
+
+        /* Make it move */
+        @keyframes marquee {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            100% {
+                transform: translate(-100%, 0);
+            }
+        }
+
+        /* Make it pretty */
+        .microsoft {
+            padding-left: 1.5em;
+            position: relative;
+            font: 16px Arial,'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+        }
+
+            /* ::before was :before before ::before was ::before - kthx */
+            .microsoft:before, .microsoft::before {
+                z-index: 2;
+                content: '';
+                position: absolute;
+                top: -1em;
+                left: -1em;
+                width: .5em;
+                height: .5em;
+                /*box-shadow: 1.0em 1.25em 0 #F65314,
+        		1.6em 1.25em 0 #7CBB00,
+        		1.0em 1.85em 0 #00A1F1,
+        		1.*/
+                box-shadow: 1.85em 0 #FFBB00;
+            }
+
+            .microsoft:after, .microsoft::after {
+                z-index: 1;
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 2em;
+                height: 2em;
+                /* background-image: linear-gradient(90deg, white 70%, rgba(255,255,255,0));*/
+                background-image: none;
+            }
+
+        /* Style the links */
+        .vanity {
+            color: #333;
+            text-align: center;
+            font: .75em 'Segoe UI', Tahoma, Helvetica, Sans-Serif;
+        }
+
+            .vanity a, .microsoft a {
+                color: #1570A6;
+                transition: color .5s;
+                text-decoration: none;
+            }
+
+                .vanity a:hover, .microsoft a:hover {
+                    color: #F65314;
+                }
+
+        /* Style toggle button */
+        .toggle {
+            display: block;
+            margin: 2em auto;
+        }
+    </style>
+    <style>
+        #showmessage {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 500px;
+            height: 500px;
+            margin-top: -250px; /* Half the height */
+            margin-left: -250px;
+        }
+    </style>
+    <style type="text/css">
+        a:visited {
+            color: white;
+            font-family: Tahoma,Verdana;
+            font-weight: normal;
+            text-decoration: none;
+        }
+
+        a:active {
+            text-decoration: none;
+        }
+
+        .jajarangenjang {
+            width: 50%;
+            /*height: 75px;*/
+            background-color: #07466c;
+            color: white;
+            font-weight: bolder;
+            font-family: Calibri;
+            -webkit-transform: skew(170deg);
+            -moz-transform: skew(170deg);
+            -o-transform: skew(170deg);
+            transform: skew(170deg);
+            padding-bottom: 5px;
+            margin-bottom: 0px;
+            border-radius: 5px;
+            /*padding-bottom:0.5em;*/
+            padding-top: 0.2em;
+            margin-left: 0px;
+            padding-left: 5px;
+            /*outline-offset:1px;*/
+        }
+    </style>
+
+
+    <script>
+        (function ($) {
+
+            //cache nav
+            var nav = $("#topNav");
+
+            //add indicator and hovers to submenu parents
+            nav.find("li").each(function () {
+                if ($(this).find("ul").length > 0) {
+                    $("<span>").text("^").appendTo($(this).children(":first"));
+
+                    //show subnav on hover
+                    $(this).mouseenter(function () {
+                        $(this).find("ul").stop(true, true).slideDown();
+                    });
+
+                    //hide submenus on exit
+                    $(this).mouseleave(function () {
+                        $(this).find("ul").stop(true, true).slideUp();
+                    });
+                }
+            });
+        })(jQuery);
+    </script>
+    <script>
+        function openreport(url) {
+            window.open(url, "myrep");
+        }
+
+        function openreport2(url) {
+            window.open(url, "myrep");
+        }
+
+        function popupwindow(url) {
+            mywindow = window.open(url, "mywindow", "location=1,status=1,scrollbars=1,  width=900,height=600");
+            mywindow.moveTo(400, 200);
+        }
+
+    </script>
+    <script>
+        function openreport1(url1, url2) {
+            window.open(url1, "Report View");
+            window.open(url2, "Report Print");
+        }
+
+
+    </script>
+    <script type="text/javascript">
+        var lab = 'cd';
+        function start() {
+            //Enter time in sec
+            var amount = getCookie("cdclosing");
+            displayCountdown(setCountdown(0, 0, amount), lab);
+        }
+        loaded(lab, start);
+        var pageLoaded = 0;
+        window.onload = function () { pageLoaded = 1; }
+        function loaded(i, f) {
+            if (document.getElementById && document.getElementById(i) != null)
+                f();
+            else if (!pageLoaded)
+                setTimeout('loaded(\'' + i + '\',' + f + ')', 100);
+        }
+        function setCountdown(hour, min, second) {
+            if (hour > 0)
+                min = min * hour * 60;
+            c = setC(min, second);
+            return c;
+        }
+        function setC(min, second) {
+            if (min > 0)
+                second = min * 60 * second;
+            return Math.floor(second);
+        }
+        function displayCountdown(countdn, cd) {
+            if (countdn < 0) {
+                //window.location = "fm_closingdaily.aspx";
+            }
+            else {
+                var secs = countdn % 60;
+                if (secs < 10)
+                    secs = '0' + secs;
+                var countdn1 = (countdn - secs) / 60;
+                var mins = countdn1 % 60;
+                if (mins < 10)
+                    mins = '0' + mins;
+                countdn1 = (countdn1 - mins) / 60;
+                var hours = countdn1 % 24;
+                document.getElementById(cd).innerHTML = hours + ' : ' + mins + ' : ' + secs;
+                setTimeout('displayCountdown(' + (countdn - 1) + ',\'' + cd + '\');', 999);
+            }
+        }
+        function getCookie(cname) {
+            var name = cname + "=",
+                ca = document.cookie.split(';'),
+                i,
+                c,
+                ca_length = ca.length;
+            for (i = 0; i < ca_length; i += 1) {
+                c = ca[i];
+                while (c.charAt(0) === ' ') {
+                    c = c.substring(1);
+                }
+                if (c.indexOf(name) !== -1) {
+                    return c.substring(name.length, c.length);
+                }
+            }
+            return "";
+        }
+
+        function setCookie(variable, value, expires_seconds) {
+            var d = new Date();
+            d = new Date(d.getTime() + 100000 * expires_seconds);
+            document.cookie = variable + '=' + value + '; expires=' + d.toGMTString() + ';';
+        }
+        function toTitleCase(str) {
+            return str.replace(/\w\S*/g, function (txt) { return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase(); });
+        }
+    </script>
+
+
+</head>
+
+<body class="align-strech cntner header-fix bg-white">
+    <div class="full">
+        <div class="heder bg-white">
+            <div class="header-info">
+                <asp:Label ID="lbwazarandat" runat="server" CssClass="inline-block">Open Date : <p class="no-margin inline-block"><%=Request.Cookies["waz_dt"].Value.ToString() %></p></asp:Label>
+                <div class="inline-block">
+                    <asp:Panel ID="Panel1" runat="server" Style="padding-right: 24px;" CssClass="">
+                        <span class="">Sys Closing Remain:</span>
+                        <span id="cd" class="text-red text-bold " runat="server"></span>
+                    </asp:Panel>
+                </div>
+                <div class="inline-block pull-right" style="padding-right: 40px;">
+                    <div class="">
+                        <asp:Label ID="lbwel" runat="server" Text="Welcome to Wazaran System, " Style="font-size: 12px;"></asp:Label>
+                        <asp:Label ID="lbuser" runat="server" Style="font-size: 12px;"></asp:Label>
+                        |
+                            <asp:Label ID="lbsp" runat="server" Font-Bold="True"></asp:Label>
+                    </div>
+                </div>
+            </div>
+            <header>
+                <div class="sidebar-menu-left">
+                    <div class=" icon-hamburger ico-le" data-sidebar="#sdbar" data-body-all="true">
+                        <a href="#">
+                            <i class="line-bar"></i>
+                            <i class="line-bar"></i>
+                            <i class="line-bar"></i>
+                            <i class="line-bar"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="logo">
+                    <asp:HyperLink runat="server" NavigateUrl="~/Default_2.aspx" CssClass="full">
+                            <img src="image/logo_indomorocco.jpeg" />
+                    </asp:HyperLink>
+                </div>
+                <div>
+                    <div class="menu" style="font-family: Verdana ; font-size:smaller">
+                        <ul>
+                            <li class="home-btn">
+                                <asp:HyperLink runat="server" NavigateUrl="~/Default_2.aspx">
+                                        <i class="fa fa-home"></i>
+								        <p>Home </p>
+                                </asp:HyperLink>
+                            </li>
+                            <li class="dropdown dropdown-master accounting-btn">
+                                <a class="dropselect">
+                                    <i class="fa fa-money"></i>
+                                    <p>Finance</p>
+                                </a>
+                                <div class="childs">
+                                    <ul>
+                                        <li class="dropdown dropdown-child menu-master">
+                                            <a class="dropselect">Master
+                                            </a>
+                                            <div class="childs" style="width: 500px">
+                                                <ul>
+                                                    <%
+                                                        int i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "FNCM")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'>" +
+                                                                        "<a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a>" +
+                                                                        "</li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child menu-transaction">
+                                            <a class="dropselect">Transaction
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%
+                                                        i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "FNCT")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child menu-report">
+                                            <a class="dropselect">Report
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%
+                                                        i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "FNCR")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li class="dropdown dropdown-master accounting-btn">
+                                <a class="dropselect">
+                                    <i class="fa fa-money"></i>
+                                    <p>Accounting </p>
+                                </a>
+                                <div class="childs">
+                                    <ul>
+                                        <li class="dropdown dropdown-child menu-master">
+                                            <a class="dropselect">Master
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%
+                                                        i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 2) == "10")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child menu-request">
+                                            <a class="dropselect">Request By Branch
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "ACCR")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child menu-transaction">
+                                            <a class="dropselect">Transaction By Branch
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "ACCB")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child menu-transaction">
+                                            <a class="dropselect">Approval By HO
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "ACCA")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child menu-approv">
+                                            <a class="dropselect">Approval By Branch
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "ACCD")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>"+ arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                        <li class="dropdown dropdown-child menu-report">
+                                            <a class="dropselect">Report
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "ACCP")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </li>
+
+                            <li class="dropdown dropdown-master logistic-btn">
+                                <a class="dropselect">
+                                    <i class="fa fa-archive"></i>
+                                    <p>Logistic & Purchasing</p>
+                                </a>
+                                <div class="childs">
+                                    <ul>
+                                        <li class="dropdown dropdown-child btn-master">
+                                            <a class="dropselect">Planning
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "LOGA")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child btn-master">
+                                            <a class="dropselect">Transaction by HO
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "LOGB")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child btn-master">
+                                            <a class="dropselect">Transaction by Branch 
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "LOGC")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child .btn-report">
+                                            <a class="dropselect">Approval by HO 
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "LOGH")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child .btn-report">
+                                            <a class="dropselect">Approval by Branch 
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "LOGP")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child .btn-report">
+                                            <a class="dropselect">Report
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "LOGR")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                            </li>
+                            <li class="dropdown dropdown-master drop-left sales-marketing">
+                                <a class="dropselect">
+                                    <i class="fa fa-bar-chart"></i>
+                                    <p>Sales Marketing</p>
+                                </a>
+                                <div class="childs">
+                                    <ul>
+                                        <li class="dropdown dropdown-child drop-left btn-master">
+                                            <a class="dropselect">Promotion by HO
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SLSP")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child drop-left btn-master">
+                                            <a class="dropselect">Master by HO
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SLSA")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child drop-left btn-master">
+                                            <a class="dropselect">Master by Branch
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SLSB")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child drop-left btn-transactionb">
+                                            <a class="dropselect">Transaction By Branch
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SLSC")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child .btn-report">
+                                            <a class="dropselect">Approval by Branch 
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SLSD")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child drop-left btn-master">
+                                            <a class="dropselect">Master
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 2) == "17")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child drop-left btn-request">
+                                            <a class="dropselect">Request
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 2) == "11")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child drop-left btn-approval">
+                                            <a class="dropselect">Approval
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 2) == "12")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child drop-left btn-report">
+                                            <a class="dropselect">Report
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SLSR")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </li>
+
+                            <li class="dropdown dropdown-master drop-left btn-HR">
+                                <a class="dropselect">
+                                    <i class="fa fa-user-circle"></i>
+                                    <p>HR</p>
+                                </a>
+                                <div class="childs">
+                                    <ul>
+                                        <li class="dropdown drop-left dropdown-child btn-master">
+                                            <a class="dropselect">Master
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 3) == "HRM")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'> <i class='fa  fa-dot-circle-o'></i>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown drop-left dropdown-child btn-master">
+                                            <a class="dropselect">Operational
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 3) == "HRA")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'> <i class='fa  fa-dot-circle-o'></i>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown drop-left dropdown-child btn-master">
+                                            <a class="dropselect">Report
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 3) == "HRP")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'> <i class='fa  fa-dot-circle-o'></i>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+                            </li>
+                            <li class="dropdown  dropdown-master drop-left  btn-tools">
+                                <a class="dropselect">
+                                    <i class="fa fa-cogs"></i>
+                                    <p>Control Room</p>
+                                </a>
+                                <div class="childs">
+                                    <ul>
+                                        <li class="dropdown dropdown-child  drop-left  btn-utool">
+                                            <a class="dropselect">Customer 
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SETC")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </li>
+                            <!-- Start -->
+                            <li class="dropdown  dropdown-master drop-left  btn-tools">
+                                <a class="dropselect">
+                                    <i class="fa fa-cogs"></i>
+                                    <p>Settings</p>
+                                </a>
+                                <div class="childs">
+                                    <ul>
+                                        <li class="dropdown dropdown-child  drop-left  btn-utool">
+                                            <a class="dropselect">Master 
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SETM")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                        <li class="dropdown dropdown-child  drop-left  btn-utool">
+                                            <a class="dropselect">User Tools
+                                            </a>
+                                            <div class="childs">
+                                                <ul>
+                                                    <%  i = 0;
+                                                        foreach (string s in arrallmenu)
+                                                        {
+                                                            if (s.Substring(0, 4) == "SETA")
+                                                            {
+                                                                int ncheck = Array.IndexOf(arrmenu.ToArray(), s);
+                                                                if (ncheck > -1)
+                                                                {
+                                                                    Response.Write("<li class='menu-link' id='" + arrallaspfile[i] + "'><a href='" + arrallaspfile[i] + "'>" + arrallmenucaption[i] + "</a></li>");
+                                                                }
+                                                            }
+                                                            i++;
+                                                        }
+
+                                                    %>
+                                                </ul>
+                                            </div>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </li>
+                            <!-- End -->
+                        </ul>
+                    </div>
+                </div>
+                <div class="header-menu pull-right">
+                    <div class="pull-right icon-hamburger" data-sidebar="#rsdbar">
+                        <a href="#">
+                            <i class="line-bar"></i>
+                            <i class="line-bar"></i>
+                            <i class="line-bar"></i>
+                            <i class="line-bar"></i>
+                        </a>
+                    </div>
+                    <div class="menus menu-burger" id="rsdbar">
+                        <div class="header-menu">
+                            <div class="close-burger">
+                                <a href="#" class=""><i class="fa fa-close"></i></a>
+                            </div>
+                            <a href="#">
+                                <asp:Label ID="lblang" runat="server" Font-Bold="True"></asp:Label></a>
+                            <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-list-ol"></i></a>
+
+                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/fm_logout5.aspx">
+                                    <i class="fa fa-sign-out "></i>
+                                    <span>Logout</span>
+                            </asp:HyperLink>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <div class="copy-menu menu-burger" id="sdbar"></div>
+        </div>
+        <div class="content">
+            <div class="main-content container-fluid" style="background-color: white">
+
+                <div class="row type-list">
+
+                    <div class="containers bg-white">
+                        <form id="form1" runat="server">
+
+                            <div class="row">
+                                <%--<div class="alert alert-danger alert-dismissible" role="alert">--%>
+                                <marquee scrollamount="3">
+                                    <p style="font-family: Impact; font-size: 10pt; color: red">
+                                        <asp:Label ID="lbnotification" runat="server" Text="Label"></asp:Label>
+                                    </p>
+                                </marquee>
+                                <%--</div>--%>
+                            </div>
+
+
+
+                            <asp:ToolkitScriptManager ID="ScriptManagerTK" runat="server" EnablePageMethods="true">
+                                <Scripts>
+                                    <asp:ScriptReference Path="~/js/AutoLostFocus.js" />
+                                </Scripts>
+                            </asp:ToolkitScriptManager>
+
+                            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                                <asp:Label ID="lbmsg" runat="server" Text="Label"></asp:Label>
+                            </asp:ContentPlaceHolder>
+
+                        </form>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <footer>
+            <div class="created">
+                <p>Copyright @2022 SBTC - SAWAZ Development Team</p>
+            </div>
+            <div class="ver">
+                VERS 0.2.0
+            </div>
+        </footer>
+    </div>
+
+
+
+    <%--modal--%>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">List</h4>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        <%--<asp:label id="lblM" runat="server"/>--%>
+                        <% try
+                            { %>
+                        <% if (System.IO.File.Exists(@"d:\images\banner.inc")) %>
+                        <% { %>
+                        <% Response.WriteFile("/images/banner.inc"); %>
+                        <% }
+                            else %>
+                        <% { %>
+                        <% Response.Write("Welcome to Wazaran @2017"); %>
+                        <% } %>
+                        <% }
+                            catch (Exception ex) %>
+                        <% { Response.Write("Welcome to Wazaran @2017"); } %>
+                    </p>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>
