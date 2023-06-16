@@ -13,7 +13,7 @@
 <link href="css/font-face/khula.css" rel="stylesheet" />
 <link href="css/font-awesome.min.css" rel="stylesheet" />
 <script>
-    function closewin() {
+    function closewin() { 
         window.opener.updpnl();
         window.close();
     }
